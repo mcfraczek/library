@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/13242394/spring-mvc-multiple-modelattribute-on-the-same-form
+http://forum.thymeleaf.org/I-have-problem-in-binding-the-list-of-objects-contained-inside-a-object-on-the-form-using-thymeleaf-td3525038.html
