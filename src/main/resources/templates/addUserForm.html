@@ -2,66 +2,96 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./addUserForm/css/styles.css">
     <title>AddUserForm</title>
 </head>
 <body>
 <div class="container">
-    <form action="#" th:action="@{/processForm}" th:object="${model}" th:method="${'post'}">
+    <form method="post" th:action="@{/processForm}" th:object="${user}">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{model[0].name}">
+                <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}">
             </div>
             <div class="form-group col-md-6">
                 <label for="surname">Surname</label>
-                <input type="text" class="form-control" id="surname" placeholder="Surname" th:field="*{model[0].surname}">
+                <input type="text" class="form-control" id="surname" placeholder="Surname" th:field="*{surname}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="PESEL">PESEL</label>
+                <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{PESEL}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="telephone">Telephone number</label>
+                <input type="text" class="form-control" id="telephone" placeholder="602986739"
+                       th:field="*{userDetails.telNumber}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="bob@gmail.com"
+                       th:field="*{userDetails.email}">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-8">
                 <label for="street">Street</label>
-                <input type="text" class="form-control" id="street" placeholder="Main St">
+                <input type="text" class="form-control" id="street" placeholder="St. John"
+                       th:field="*{userDetails.address.street}">
             </div>
             <div class="form-group col-md-2">
                 <label for="streetNumber">Street Number</label>
-                <input type="text" class="form-control" id="streetNumber" placeholder="1234">
+                <input type="text" class="form-control" id="streetNumber" placeholder="2b"
+                       th:field="*{userDetails.address.streetNumber}">
             </div>
             <div class="form-group col-md-2">
                 <label for="apartmentNumber">Apartment Number</label>
-                <input type="text" class="form-control" id="apartmentNumber" placeholder="12">
+                <input type="text" class="form-control" id="apartmentNumber" placeholder="54"
+                       th:field="*{userDetails.address.apartmentNumber}">
             </div>
-
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="county">County</label>
+                    <select id="county" class="form-control" th:field="*{userDetails.address.county}">
+                        <option selected value="none">Choose...</option>
+                        <option value="mazowieckie">mazowieckie</option>
+                        <option value="pomorskie">pomorskie</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" th:field="*{userDetails.address.postalCode}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" th:field="*{userDetails.address.city}">
+                </div>
+                <div class="form-check col-md-2">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                        Check me out
+                    </label>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                    Check me out
-                </label>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
     </form>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 </html>

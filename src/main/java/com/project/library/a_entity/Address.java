@@ -21,6 +21,8 @@ public class Address {
     private String streetNumber;
     @Column(name = "apartment_number")
     private String apartmentNumber;
+    @Column(name = "county")
+    private String county;
     @Column(name = "postal_code")
     private String postalCode;
     @Column(name = "city")
