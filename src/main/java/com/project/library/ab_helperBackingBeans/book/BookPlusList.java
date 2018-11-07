@@ -7,10 +7,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BookPlus implements ListHelper {
+public class BookPlusList implements ListHelper {
     private Book book;
 
-    public List<String> genresList() {
+    @Override
+    public List<String> listFromDirectFile() {
         return list("book", "bookGenres.txt");
     }
 }

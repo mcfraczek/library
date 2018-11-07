@@ -1,6 +1,6 @@
 package com.project.library.d_controllers;
 
-import com.project.library.ab_helperBackingBeans.book.BookPlus;
+import com.project.library.ab_helperBackingBeans.book.BookPlusList;
 import com.project.library.c_service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +15,12 @@ public class AddingBookController {
 
 
     @RequestMapping("/addBook")
-    public ModelAndView showForm(BookPlus book) {
+    public ModelAndView showForm(BookPlusList book) {
         return new ModelAndView("addBookForm", "book", book);
     }
 
     @RequestMapping("/processAddBookForm")
-    public String processForm(@ModelAttribute("book") BookPlus book) {
+    public String processForm(@ModelAttribute("book") BookPlusList book) {
         bookService.saveBook(book.getBook());
         return "bookSaved";
     }

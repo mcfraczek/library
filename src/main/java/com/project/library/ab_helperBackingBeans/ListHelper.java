@@ -24,4 +24,6 @@ public interface ListHelper {
         }
         return list;
     }
+
+    List<String> listFromDirectFile();
 }
