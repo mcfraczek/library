@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <form method="post" th:action="@{/processForm}" th:object="${user}">
+    <form method="post" th:action="@{/processAddUserForm}" th:object="${user}">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Name</label>
@@ -52,7 +52,7 @@
                 <input type="text" class="form-control" id="apartmentNumber" placeholder="54"
                        th:field="*{userDetails.address.apartmentNumber}">
             </div>
-            <div class="row">
+            <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="county">County</label>
                     <select id="county" class="form-control" th:field="*{userDetails.address.county}">
@@ -82,7 +82,6 @@
         </div>
     </form>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

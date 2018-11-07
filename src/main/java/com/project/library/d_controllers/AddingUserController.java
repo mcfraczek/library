@@ -20,9 +20,9 @@ public class AddingUserController {
         return "addUserForm";
     }
 
-    @PostMapping("/processForm")
+    @PostMapping("/processAddUserForm")
     private String processForm(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "saved";
+        return "userSaved";
     }
 }
