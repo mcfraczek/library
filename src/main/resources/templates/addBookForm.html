@@ -23,9 +23,31 @@
                 <input class="form-control" type="text" id="author2" placeholder="Alan Alexander Milne"
                        th:field="*{title}">
             </div>
-            <p><button type="button" class="btn btn-primary" id="addAuthor">Add Author +</button></p>
+            <p>
+                <button type="button" class="btn btn-primary" id="addAuthor">Add Author +</button>
+            </p>
         </div>
-        <input type="submit">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="ISBN">ISBN</label>
+                <input class="form-control" type="text" id="ISBN" placeholder="978-2-1234-5680-3"
+                       th:field="*{ISBN}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="number">Library Number</label>
+                <input class="form-control" type="text" id="number" placeholder="978-2-1234-5680-3"
+                       th:field="*{libraryNumber}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="genre">Genre</label>
+                <select id="genre" class="form-control">
+                    <option selected value="choose...">choose...</option>
+                    <option value="science-fiction">science-fiction</option>
+                    <option value="drama">drama</option>
+                </select>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
