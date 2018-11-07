@@ -42,7 +42,7 @@
             <div class="form-group col-md-3" id="copy2">
                 <label for="genre">Genre</label>
                 <select id="genre" class="form-control" th:field="*{book.title}">
-                    <option selected value="choose..." disabled="disabled">choose...</option>
+                    <option selected="selected" value="choose..." disabled="disabled">choose...</option>
                     <option th:each="g : ${book.listFromDirectFile()}" th:text="${g}" th:value="${g}">science-fiction
                     </option>
                 </select>
