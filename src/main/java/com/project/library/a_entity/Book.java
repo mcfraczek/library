@@ -36,5 +36,4 @@ public class Book {
             fetch = FetchType.EAGER)
     private User user;
 
-
 }

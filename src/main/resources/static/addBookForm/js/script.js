@@ -8,3 +8,8 @@ var addAuthor = $("#addAuthor").on("click", function () {
     var copied = copy1 + authorCount + "'" + ">Author " + authorCount + copy2 + authorCount + "'" + copy3;
     copyTo.append(copied);
 });
+
+var copy_2 = $("#copy2").html();
+$("#addGenre").on("click", function () {
+    $("#copyTo2").append(copy_2);
+});

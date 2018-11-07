@@ -14,38 +14,44 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="title">Title</label>
-                <input class="form-control" type="text" id="title" placeholder="Winnie The Pooh" th:field="*{title}">
+                <input class="form-control" type="text" id="title" placeholder="Winnie The Pooh"
+                       th:field="*{book.title}">
             </div>
         </div>
         <div class="form-row" id="copyTo">
             <div class="form-group col-md-6">
                 <label for="author2">Author</label>
                 <input class="form-control" type="text" id="author2" placeholder="Alan Alexander Milne"
-                       th:field="*{title}">
+                       th:field="*{book.title}">
             </div>
             <p>
                 <button type="button" class="btn btn-primary" id="addAuthor">Add Author +</button>
             </p>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="ISBN">ISBN</label>
                 <input class="form-control" type="text" id="ISBN" placeholder="978-2-1234-5680-3"
-                       th:field="*{ISBN}">
+                       th:field="*{book.ISBN}">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="number">Library Number</label>
                 <input class="form-control" type="text" id="number" placeholder="978-2-1234-5680-3"
-                       th:field="*{libraryNumber}">
+                       th:field="*{book.libraryNumber}">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3" id="copy2">
                 <label for="genre">Genre</label>
-                <select id="genre" class="form-control">
-                    <option selected value="choose...">choose...</option>
-                    <option value="science-fiction">science-fiction</option>
-                    <option value="drama">drama</option>
+                <select id="genre" class="form-control" th:field="*{book.title}">
+                    <option selected value="choose..." disabled="disabled">choose...</option>
+                    <option th:each="g : ${book.genresList()}" th:text="${g}" th:value="${g}">science-fiction</option>
                 </select>
             </div>
+            <div class="form-group col-md-3">
+                <button type="button" class="btn btn-primary" id="addGenre">Add Genre</button>
+            </div>
+        </div>
+        <div class="form-row rightMine">
+            <div id="copyTo2" class="col-md-12"></div>
         </div>
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
