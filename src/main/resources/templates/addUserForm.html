@@ -56,7 +56,7 @@
                 <div class="form-group col-md-3">
                     <label for="county">County</label>
                     <select id="county" class="form-control" th:field="*{user.userDetails.address.county}">
-                        <option selected value="none" disabled="disabled">Choose...</option>
+                        <option selected="selected" value="choose" disabled="disabled">Choose</option>
                         <option th:each="c : ${user.listFromDirectFile()}" th:text="${c}" th:value="${c}"></option>
                     </select>
                 </div>
