@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+
 @ToString
 @NoArgsConstructor
 @Data
@@ -24,4 +26,11 @@ public class Author {
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> bookList;
+
+    public void addBook(Book book) {
+        if (bookList == null) {
+            bookList = new ArrayList<>();
+        }
+        bookList.add(book);
+    }
 }

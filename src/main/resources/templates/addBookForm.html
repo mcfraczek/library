@@ -18,16 +18,22 @@
                        th:field="*{book.title}">
             </div>
         </div>
-        <div class="form-row" id="copyTo">
+        <div class="form-row" th:each="author, rowStat : *{book.authorList}">
             <div class="form-group col-md-6">
-                <label for="author2">Author</label>
-                <input class="form-control" type="text" id="author2" placeholder="Alan Alexander Milne"
-                       th:field="*{book.title}">
+                <label for="author">Author</label>
+                <input class="form-control" type="text" id="author" placeholder="Alan Alexander Milne"
+                       th:field="*{book.authorList[__${rowStat.index}__]}">
             </div>
-            <p>
-                <button type="button" class="btn btn-primary" id="addAuthor">Add Author +</button>
-            </p>
         </div>
+        <!--    <div class="form-row" id="copyTo">
+                <div class="form-group col-md-6">
+                    <label for="author2">Author</label>
+                    <input class="form-control" type="text" id="author2" placeholder="Alan Alexander Milne">
+                </div>
+                <p>
+                    <button type="button" class="btn btn-primary" id="addAuthor">Add Author +</button>
+                </p>
+            </div>-->
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="ISBN">ISBN</label>
@@ -39,6 +45,7 @@
                 <input class="form-control" type="text" id="number" placeholder="978-2-1234-5680-3"
                        th:field="*{book.libraryNumber}">
             </div>
+
             <div class="form-group col-md-3" id="copy2">
                 <label for="genre">Genre</label>
                 <select id="genre" class="form-control" th:field="*{book.title}">
@@ -66,6 +73,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-<script type="text/javascript" src="./addBookForm/js/script.js"></script>
+<!--<script type="text/javascript" src="./addBookForm/js/script.js"></script>-->
 </body>
 </html>
