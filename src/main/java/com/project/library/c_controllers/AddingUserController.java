@@ -1,7 +1,7 @@
-package com.project.library.d_controllers;
+package com.project.library.c_controllers;
 
 import com.project.library.ab_helperBackingBeans.user.UserPlusList;
-import com.project.library.c_service.UserService;
+import com.project.library.b_DAO.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AddingUserController {
     @Autowired
-    private UserService userService;
+    private UserDAO userDAO;
 
     @RequestMapping("/addUser")
     private String showForm(Model model, UserPlusList user) {
@@ -22,7 +22,7 @@ public class AddingUserController {
 
     @PostMapping("/processAddUserForm")
     private String processForm(@ModelAttribute("user") UserPlusList user) {
-        userService.saveUser(user.getUser());
+        userDAO.save(user.getUser());
         return "userSaved";
     }
 }
