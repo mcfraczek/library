@@ -1,14 +1,12 @@
 package com.project.library.a_entity;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 @ToString
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "address")
 public class Address {
