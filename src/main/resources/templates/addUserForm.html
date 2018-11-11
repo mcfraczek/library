@@ -72,13 +72,14 @@
                 <div class="form-group col-md-2">
                     <label for="inputZip" class="text-light">Zip</label>
                     <input type="text" class="form-control" id="inputZip"
-                           th:field="*{user.userDetails.address.postalCode}">
+                           placeholder="03-765" th:field="*{user.userDetails.address.postalCode}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="city" class="text-light">City</label>
-                    <input type="text" class="form-control" id="city" th:field="*{user.userDetails.address.city}">
+                    <input type="text" class="form-control" id="city" placeholder="Warszawa"
+                           th:field="*{user.userDetails.address.city}">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <button type="submit" class="btn btn-light">Sign in</button>
                 </div>
             </div>
