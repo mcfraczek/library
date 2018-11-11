@@ -8,75 +8,78 @@
     <title>AddUserForm</title>
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-dark bg-dark mb-5">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand active">Add User</a>
+        <div class="nav-item">
+            <a class="nav-link text-light" href="#" th:href="@{/}">Back</a>
+        </div>
+
+    </div>
+</nav>
+<div class="container mt-5">
     <form method="post" th:action="@{/processAddUserForm}" th:object="${user}">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="name">Name</label>
+                <label for="name" class="text-light">Name</label>
                 <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{user.name}">
             </div>
             <div class="form-group col-md-6">
-                <label for="surname">Surname</label>
+                <label for="surname" class="text-light">Surname</label>
                 <input type="text" class="form-control" id="surname" placeholder="Surname" th:field="*{user.surname}">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="PESEL">PESEL</label>
+                <label for="PESEL" class="text-light">PESEL</label>
                 <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{user.PESEL}">
             </div>
             <div class="form-group col-md-4">
-                <label for="telephone">Telephone number</label>
+                <label for="telephone" class="text-light">Telephone number</label>
                 <input type="text" class="form-control" id="telephone" placeholder="602986739"
                        th:field="*{user.userDetails.telNumber}">
             </div>
             <div class="form-group col-md-4">
-                <label for="email">Email</label>
+                <label for="email" class="text-light">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="bob@gmail.com"
                        th:field="*{user.userDetails.email}">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-8">
-                <label for="street">Street</label>
+                <label for="street" class="text-light">Street</label>
                 <input type="text" class="form-control" id="street" placeholder="St. John"
                        th:field="*{user.userDetails.address.street}">
             </div>
             <div class="form-group col-md-2">
-                <label for="streetNumber">Street Number</label>
+                <label for="streetNumber" class="text-light">Street Number</label>
                 <input type="text" class="form-control" id="streetNumber" placeholder="2b"
                        th:field="*{user.userDetails.address.streetNumber}">
             </div>
             <div class="form-group col-md-2">
-                <label for="apartmentNumber">Apartment Number</label>
+                <label for="apartmentNumber" class="text-light">Apartment Number</label>
                 <input type="text" class="form-control" id="apartmentNumber" placeholder="54"
                        th:field="*{user.userDetails.address.apartmentNumber}">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="county">County</label>
+                    <label for="county" class="text-light">County</label>
                     <select id="county" class="form-control" th:field="*{user.userDetails.address.county}">
                         <option selected="selected" value="choose" disabled="disabled">Choose</option>
                         <option th:each="c : ${user.listFromDirectFile()}" th:text="${c}" th:value="${c}"></option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
+                    <label for="inputZip" class="text-light">Zip</label>
                     <input type="text" class="form-control" id="inputZip"
                            th:field="*{user.userDetails.address.postalCode}">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="city">City</label>
+                    <label for="city" class="text-light">City</label>
                     <input type="text" class="form-control" id="city" th:field="*{user.userDetails.address.city}">
                 </div>
-                <div class="form-check col-md-2">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-light">Sign in</button>
                 </div>
             </div>
         </div>

@@ -6,70 +6,74 @@
     <link rel="stylesheet" href="./bootstrap4/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="./bootstrap4/css/bootstrap-grid.min.css"/>
     <link rel="stylesheet" href="./addBookForm/css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <title>AddBook</title>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark mb-5">
     <div class="container-fluid">
         <a href="#" class="navbar-brand active">Add Book</a>
         <div class="nav-item">
-            <a class="nav-link text-light" href="#">Back</a>
+            <a class="nav-link text-light" href="#" th:href="@{/}">Back</a>
         </div>
 
     </div>
 </nav>
-<div class="container mt-5 pt-5">
+<div class="container mt-5">
     <form th:action="@{/processAddBookForm}" th:object="${book}" method="post">
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="title">Title</label>
+            <div class="form-group col-md-12">
+                <label for="title" class="text-light">Title</label>
                 <input class="form-control" type="text" id="title" placeholder="Winnie The Pooh"
                        th:field="*{book.title}">
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 text-light">
                 <label for="authorName">Author's Name/Names</label>
                 <input type="text" class="form-control" name="book.authorList[0].name" id="authorName"
                        placeholder="Alan Aleksander">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 text-light">
                 <label for="authorSurname">Author's Surname</label>
                 <input type="text" class="form-control" name="book.authorList[0].surname" id="authorSurname"
                        placeholder="Milne">
             </div>
         </div>
-        <div class="">
-            <button type="button" class="btn btn-outline-dark" id="addAuthor">Add Author +</button>
+        <div class="row justify-content-end">
+            <button type="button" class="btn btn-light btn-sm" id="addAuthor"><i class="fas fa-user-plus"></i></button>
         </div>
         <span id="authors"></span>
         <div class="form-row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 text-light">
                 <label for="ISBN">ISBN</label>
                 <input class="form-control" type="text" id="ISBN" placeholder="978-2-1234-5680-3"
                        th:field="*{book.ISBN}">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 text-light">
                 <label for="number">Library Number</label>
                 <input class="form-control" type="text" id="number" placeholder="978-2-1234-5680-3"
                        th:field="*{book.libraryNumber}">
             </div>
-            <div class="form-group col-md-3" id="copy2">
-                <label for="genre">Genre</label>
-                <select id="genre" class="form-control" th:field="*{book.title}">
+            <div id="copyFrom" class="form-group col-md-3">
+                <label for="genre" class="text-light">Genre</label>
+                <select id="genre" class="form-control" name="book.typeList[0].type">
                     <option selected value="choose..." disabled="disabled">choose...</option>
-                    <option th:each="g : ${book.listFromDirectFile()}" th:text="${g}" th:value="${g}">science-fiction
+                    <option th:each="g : ${book.listFromDirectFile()}" th:text="${g}" th:value="${g}">
+                        science-fiction
                     </option>
                 </select>
             </div>
             <div class="form-group col-md-3">
-                <button type="button" class="btn btn-outline-dark" id="addGenre">Add Genre</button>
+                <button type="button" class="btn btn-light btn-sm" id="addGenre">Add Genre</button>
             </div>
+            <span id="types"></span>
         </div>
         <div class="form-row rightMine">
             <div id="copyTo2" class="col-md-12"></div>
         </div>
-        <input type="submit" class="btn btn-outline-dark" value="Submit">
+        <input type="submit" class="btn btn-light" value="Submit">
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
