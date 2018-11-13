@@ -1,6 +1,6 @@
 var authorCount = 1;
 var divRowOpen = '<div class="form-row">';
-var button = ' <div class="col-md-2 d-flex justify-content-center align-items-end"><button type="button" class="btn btn-light btn-sm mb-1" id="deleteAuthor"><i class="fas fa-user-minus"></i></button></div>';
+var button = ' <div class="col-md-2 d-flex justify-content-center align-items-end"><button type="button" class="btn btn-light btn-sm mb-1 deleteAuthor" ><i class="fas fa-user-minus"></i></button></div>';
 
 function divColOpen(col) {
     return '<div class="col-md-' + col + '">';
@@ -27,6 +27,16 @@ $("#addGenre").on("click", function () {
     var newstr = str.replace(re, typesCount++);
     typesCopyTo.append(divRowOpen + newstr + divClose);
 });
-/*arase Authors*/
+/*erase Authors*/
 
-var buttonDeleteAuthors = $("#deleteAuthor");
+$("#authors").on("click", ".deleteAuthor", function () {
+    authorCount--;
+    $(this).parent().parent().remove();
+});
+
+/*nadzieja na uporządkowanie przed wysłaniem*/
+$('input[type="submit"]').on("click", function () {
+
+    ;
+});
+
