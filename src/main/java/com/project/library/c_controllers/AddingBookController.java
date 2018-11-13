@@ -20,6 +20,7 @@ public class AddingBookController {
 
     @RequestMapping("/processAddBookForm")
     public String processForm(@ModelAttribute("book") BookPlusList book) {
+        book.eraseNullAuthors();
         bookService.save(book.getBook());
         return "bookSaved";
     }
