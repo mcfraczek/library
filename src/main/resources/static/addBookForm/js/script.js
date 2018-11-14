@@ -25,7 +25,7 @@ $("#addGenre").on("click", function () {
     var str = typesFrom;
     var re = /([\d+])/g;
     var newstr = str.replace(re, typesCount++);
-    typesCopyTo.append(divRowOpen + newstr + divClose);
+    typesCopyTo.append(divRowOpen + divColOpen(7) + divClose + divColOpen(5) + newstr + divClose + divClose);
 });
 /*erase Authors*/
 
