@@ -7,9 +7,6 @@
     <title>borrowingBookForm</title>
 </head>
 <body>
-<!--User - musi być jakaś wyszukiwarka - on demand-->
-<!--Wyświetla użytkowników po nazwisku, imieniu-->
-<!--Library number-->
 <nav class="navbar navbar-dark bg-dark mb-5">
     <div class="container-fluid">
         <a href="#" class="navbar-brand active">User Borrows Book</a>
@@ -22,41 +19,47 @@
     <form class="form-inline" th:action="@{/borrowingBookFormShowUsers}">
         <div class="input-group col-md-5">
             <div class="input-group-prepend">
-                <label for="name" class="input-group-text" id="basic-addon1">User's Name</label>
-            </div>
-            <input type="text" name="name" class="form-control" placeholder="John" aria-label="Username"
-                   aria-describedby="basic-addon1" id="name">
-        </div>
-        <div class="input-group col-md-5">
-            <div class="input-group-prepend">
                 <label for="surname" class="input-group-text" id="basic-addon2">User's Surname</label>
             </div>
             <input type="text" name="surname" class="form-control" placeholder="Kowalski" aria-label="Username"
                    aria-describedby="basic-addon1" id="surname">
+        </div>
+        <div class="input-group col-md-5">
+            <div class="input-group-prepend">
+                <label for="name" class="input-group-text" id="basic-addon1">User's Name</label>
+            </div>
+            <input type="text" name="name" class="form-control" placeholder="John" aria-label="Username"
+                   aria-describedby="basic-addon1" id="name">
         </div>
         <div class="col-md-2 d-flex justify-content-center">
             <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
         </div>
     </form>
     <div class="container mt-5" th:if="${userList!= null}">
-        <table class="table table-striped table-light table-hover" th:if="${userList.size()>0}">
+        <table class="table table-striped table-light table-hover text-center" th:if="${userList.size()>0}">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
                 <th scope="col">Last</th>
-                <th scope="col">Library Id</th>
+                <th scope="col">First</th>
+                <th scope="col">PESEL</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="u : ${userList}">
-                <th th:text="${userList.indexOf(u)}" scope="row">1</th>
-                <td th:text="${u.name}">Mark</td>
-                <td th:text="${u.surname}">Otto</td>
-                <td th:text="${u.id}">@mdo</td>
+                <th th:text="${userList.indexOf(u)+1}" scope="row">1</th>
+                <td th:text="${u.surname}">Mark</td>
+                <td th:text="${u.name}">Otto</td>
+                <td th:text="${u.PESEL}">@mdo</td>
+                <td class="w-25 mr-0 text-right">
+                    <a class="btn btn-light mr-3" th:href="@{/borrowingBookDetails(userId=${u.id})}">Borrow/Return</a>
+                </td>
             </tr>
         </table>
         <h1 class="display-3 text-center text-light" th:if="${userList.size()==0}">No Records Found</h1>
+    </div>
+    <div class="container mt-5">
+        <h1 class="display-3 text-center text-light" th:if="${userList==null}">From Home Page</h1>
     </div>
 </div>
 </body>
