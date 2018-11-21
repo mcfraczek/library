@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./bootstrap4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./BorrowingBookDetails/css/styles.css">
     <title>BorrowingBookDetails</title>
 </head>
 <body>
@@ -15,7 +16,27 @@
     </div>
 </nav>
 <div class="container">
-    <h1 class="display-3" th:text="${'Hello From Details'}"></h1>
+    <h3 class="text-center text-light mb-3">Personal Info</h3>
+    <table class="table table-striped table-light text-center">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Last</th>
+            <th scope="col">First</th>
+            <th scope="col">PESEL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td class="w-25 mr-0 text-right">
+                <a class="btn btn-light mr-3">Borrow/Return</a>
+            </td>
+        </tr>
+    </table>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
