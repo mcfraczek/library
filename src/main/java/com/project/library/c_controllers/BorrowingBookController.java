@@ -37,7 +37,6 @@ public class BorrowingBookController {
 
     @RequestMapping("/borrowingBookDetails")
     public String borrowingBookDetails(@RequestParam("userId") int userId, Model model) {
-        /*show user By id*/
         Optional<User> user = userDAO.findById(userId);
         List<Book> booksBorrowedByUser = user.get().getBookList();
         model.addAttribute("books", booksBorrowedByUser);

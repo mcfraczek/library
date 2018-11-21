@@ -36,6 +36,38 @@
             <td th:text="${b.libraryNumber}">79979898779787878</td>
         </tr>
     </table>
+    <h3 class="text-center text-light mb-3">Search For Book</h3>
+    <nav class="navbar navbar-light bg-light d-flex justify-content-center">
+        <form class="form-inline w-100 justify-content-between">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label for="title" class="input-group-text">Title</label>
+                </div>
+                <input id="title" type="text" class="form-control" placeholder="W Pustyni i W Puszczy"
+                       aria-label="Username"
+                       aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label for="authorName" class="input-group-text">Author</label>
+                </div>
+                <input id="authorName" type="text" class="form-control" placeholder="Sienkiewicz Henryk"
+                       aria-label="Username"
+                       aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <label for="libraryNumber" class="input-group-text" id="basic-addon1">Library Number</label>
+                </div>
+                <input id="libraryNumber" type="text" class="form-control" placeholder="8899734734834"
+                       aria-label="Username"
+                       aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+                <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </form>
+    </nav>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
