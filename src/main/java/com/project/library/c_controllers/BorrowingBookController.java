@@ -25,8 +25,15 @@ public class BorrowingBookController {
     @RequestMapping("/borrowingBookFormShowUsers")
     public String borrowingBookFormShowUsers
             (@RequestParam("name") String name, @RequestParam("surname") String surname, Model model) {
-        List<User> userList = userService.showUsers(name, surname);
+        List<User> userList = userService.getUsers(name, surname);
         model.addAttribute("userList", userList);
         return "borrowingBookForm";
     }
+
+    @RequestMapping("/borrowingBookDetails")
+    public String borrowingBookDetails(@RequestParam("userId") int userId) {
+        /*show user By id*/
+        return "borrowingBookDetails";
+    }
+
 }
