@@ -1,13 +1,11 @@
 package com.project.library.a_entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
 @Data
 @Entity
 @Table(name = "author")
@@ -30,5 +28,24 @@ public class Author {
             bookList = new ArrayList<>();
         }
         bookList.add(book);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Author author = (Author) o;
+
+        return id == author.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }

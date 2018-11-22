@@ -3,12 +3,14 @@ package com.project.library.c_controllers;
 import com.project.library.a_entity.Book;
 import com.project.library.a_entity.User;
 import com.project.library.b_DAO.UserDAO;
+import com.project.library.b_a_service.BookService;
 import com.project.library.b_a_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,9 +22,10 @@ public class BorrowingBookController {
     private UserService userService;
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private BookService bookService;
 
     @RequestMapping("/borrowingBookForm")
-
     public String borrowingBookForm() {
         return "borrowingBookForm";
     }
@@ -41,5 +44,13 @@ public class BorrowingBookController {
         List<Book> booksBorrowedByUser = user.get().getBookList();
         model.addAttribute("books", booksBorrowedByUser);
         return "borrowingBookDetails";
+    }
+
+    @RequestMapping("/borrowingBookDetailsShowBooks")
+    public ModelAndView borrowingBookDetailsShowBooks(
+            @RequestParam("title") String title, @RequestParam("authorSN") String author,
+            @RequestParam("libraryNumber") String libraryNumber) {
+        List<Book> bookList = bookService.find(title, author, libraryNumber);
+        return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
 }
