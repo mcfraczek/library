@@ -38,12 +38,12 @@
     </table>
     <h3 class="text-center text-light mb-3">Search For Book</h3>
     <nav class="navbar navbar-light bg-light d-flex justify-content-center">
-        <form class="form-inline w-100 justify-content-between">
+        <form class="form-inline w-100 justify-content-between" th:action="@{/borrowingBookDetailsShowBooks}">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <label for="title" class="input-group-text">Title</label>
                 </div>
-                <input id="title" type="text" class="form-control" placeholder="W Pustyni i W Puszczy"
+                <input id="title" type="text" name="title" class="form-control" placeholder="W Pustyni i W Puszczy"
                        aria-label="Username"
                        aria-describedby="basic-addon1">
             </div>
@@ -51,7 +51,7 @@
                 <div class="input-group-prepend">
                     <label for="authorName" class="input-group-text">Author</label>
                 </div>
-                <input id="authorName" type="text" class="form-control" placeholder="Sienkiewicz Henryk"
+                <input id="authorName" type="text" name="authorSN" class="form-control" placeholder="Sienkiewicz Henryk"
                        aria-label="Username"
                        aria-describedby="basic-addon1">
             </div>
@@ -59,7 +59,8 @@
                 <div class="input-group-prepend">
                     <label for="libraryNumber" class="input-group-text" id="basic-addon1">Library Number</label>
                 </div>
-                <input id="libraryNumber" type="text" class="form-control" placeholder="8899734734834"
+                <input id="libraryNumber" type="text" name="libraryNumber" class="form-control"
+                       placeholder="8899734734834"
                        aria-label="Username"
                        aria-describedby="basic-addon1">
             </div>
@@ -68,6 +69,58 @@
             </div>
         </form>
     </nav>
+</div>
+
+<!--Cześć po wyszukiwaniu-->
+<div th:if="${bookList!=null}">
+    <div class="container mt-5">
+        <h1 class="display-3 text-center text-light" th:if="${bookList.size()==0}">No Records Found</h1>
+    </div>
+
+    <div th:if="${bookList.size()>0}">
+        <div class="container mt-5" th:each="bl : ${bookList}">
+            <table class="table table-striped table-light table-hover text-center mb-0">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="${bookList.indexOf(bl)+1}">1</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Library Number</th>
+                    <td class="w-25 mr-0 text-right">
+                        <!--<a class="btn btn-light mr-3">Borrow/Return</a>-->
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td th:text="${bl.title}">W Pustyni i W Puszczy</td>
+                    <td th:text="${bl.libraryNumber}">7927847843943934</td>
+                    <td class="w-25 mr-0 text-right">
+                        <!--<a class="btn btn-light mr-3">Borrow/Return</a>-->
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-striped table-light table-hover text-center" th:each="a: ${bl.authorList}">
+                <thead>
+                <tr>
+                    <th scope="row"></th>
+                    <th scope="col" class="w-100">Authors</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td><span th:text="${a.name}">Henryk</span> <span th:text="${a.surname}">Sienkiewicz</span></td>
+                    <td class="w-25 mr-0 text-right">
+                        <a class="btn btn-light mr-3">Borrow/Return</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container mt-5" th:if="${bookList==null}">
+    <h1 class="display-3 text-center text-light">From Home Page</h1>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

@@ -1,11 +1,9 @@
 package com.project.library.a_entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 
-@ToString
 @Data
 @Entity
 @Table(name = "user_details")
