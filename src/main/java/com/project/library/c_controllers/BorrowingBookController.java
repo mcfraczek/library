@@ -48,9 +48,9 @@ public class BorrowingBookController {
 
     @RequestMapping("/borrowingBookDetailsShowBooks")
     public ModelAndView borrowingBookDetailsShowBooks(
-            @RequestParam("title") String title, @RequestParam("authorSN") String author,
+            @RequestParam("title") String title, @RequestParam("authorNS") String authorNS,
             @RequestParam("libraryNumber") String libraryNumber) {
-        List<Book> bookList = bookService.find(title, author, libraryNumber);
+        List<Book> bookList = bookService.find(title, authorNS, libraryNumber);
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
 }
