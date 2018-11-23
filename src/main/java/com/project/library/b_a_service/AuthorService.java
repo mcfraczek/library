@@ -1,6 +1,7 @@
 package com.project.library.b_a_service;
 
 import com.project.library.a_entity.Author;
+import com.project.library.a_entity.Book;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
@@ -9,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
@@ -32,21 +35,46 @@ public class AuthorService {
         }
 
         if (authorHelperList.size() > 1) { /* jeśli jest wiecej niż jeden autor*/
-                /*jeśli lista książek autora nie równa się ządnej liście książek żadenego autora.
-                Usuń tego autora */
-            Iterator<Author> authorInterator = authorList.iterator();
-            while (authorInterator.hasNext()) {
-                Author author = authorInterator.next();
-
-                for (int i = 0; i < authorList.size(); i++) {
-                    if (authorList.get(i).getBookList() != author.getBookList()) {
-                        authorInterator.remove();
-                    }
-                }
-            }
+            authorList = eraseAuthorsWhoHaventWroteThisBook(authorList);
         }
         return authorList;
     }
+
+    private List<Author> eraseAuthorsWhoHaventWroteThisBook(List<Author> authorList) {
+         /*jeśli lista książek autora nie równa się ządnej liście książek żadenego autora.
+                Usuń tego autora */
+        Map<List<Book>, Integer> map = new HashMap<>();
+
+        for (Author author : authorList) {
+            if (map.containsKey(author.getBookList())) {
+                Integer count = map.get(author.getBookList());
+                map.put(author.getBookList(), count + 1);
+            } else {
+                map.put(author.getBookList(), 1);
+            }
+        }
+
+        int max = 0;
+        for (Map.Entry<List<Book>, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+            }
+        }
+        List<Book> bookList = null;
+        for (Map.Entry<List<Book>, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == max) {
+                bookList = entry.getKey();
+                System.out.println(bookList);
+            }
+        }
+        final List<Book> bookList1 = bookList;
+        List<Author> newAuthorList = authorList.stream()
+                .filter(author -> author.getBookList().equals(bookList1))
+                .collect(Collectors.toList());
+
+        return newAuthorList;
+    }
+
 
     private List<AuthorHelper> fromStringToSurnameName(String authorsSN) {
         Pattern pattern = Pattern.compile("\\w+\\s\\w+");
