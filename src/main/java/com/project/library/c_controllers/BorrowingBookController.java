@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 @Controller
 public class BorrowingBookController {
@@ -57,8 +56,8 @@ public class BorrowingBookController {
             @RequestParam("title") String title, @RequestParam("authorNS") String authorNS,
             @RequestParam("libraryNumber") String libraryNumber, HttpServletRequest request) {
         HttpSession session = request.getSession();
+//            int userId = (int) session.getAttribute("id");
 
-        OptionalInt userId = (OptionalInt) session.getAttribute("id");
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber);
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
