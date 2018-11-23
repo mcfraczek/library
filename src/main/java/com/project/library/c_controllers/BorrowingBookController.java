@@ -2,6 +2,7 @@ package com.project.library.c_controllers;
 
 import com.project.library.a_entity.Book;
 import com.project.library.a_entity.User;
+import com.project.library.ab_helperBackingBeans.book.BooksPlusList;
 import com.project.library.b_DAO.UserDAO;
 import com.project.library.b_a_service.BookService;
 import com.project.library.b_a_service.UserService;
@@ -46,8 +47,9 @@ public class BorrowingBookController {
         HttpSession session = request.getSession();
         session.setAttribute("id", userId);
         Optional<User> user = userDAO.findById(userId);
-        List<Book> booksBorrowedByUser = user.get().getBookList();
-        model.addAttribute("books", booksBorrowedByUser);
+        BooksPlusList booksPlusList = new BooksPlusList(user.get().getBookList());
+
+        model.addAttribute("books", booksPlusList);
         return "borrowingBookDetails";
     }
 
