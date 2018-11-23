@@ -27,8 +27,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="b : ${books}">
-            <th scope="row" th:text="${books.indexOf(b)+1}">1</th>
+        <tr th:each="b : ${books.bookList}">
+            <th scope="row" th:text="${books.bookList.indexOf(b)+1}">1</th>
             <td th:text="${b.title}">W pustyni i w puszczy</td>
             <td th:each="a : ${b.authorList}">
                 <span th:text="${a.name+' '+ a.surname}">Henryk Sienkiewicz</span>
@@ -48,7 +48,7 @@
                            aria-label="Username"
                            aria-describedby="basic-addon1">
                 </div>
-                <div class="input-group col-5 pl-2 pr-0">
+                <div class="input-group col-6 pl-2 pr-0">
                     <div class="input-group-prepend">
                         <label for="authorName" class="input-group-text">Authors</label>
                     </div>
@@ -73,8 +73,12 @@
                         <label class="input-group-text" for="inputGroupSelect01">Genre</label>
                     </div>
                     <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">Science Fiction</option>
+                        <option selected>
+                            Choose...
+                        </option>
+                        <option th:each="b : ${books.listFromDirectFile()}" th:name="${b}" th:text="${b}">Science
+                            Fiction
+                        </option>
                     </select>
                 </div>
                 <div class="input-group col-1 px-0 justify-content-center">
