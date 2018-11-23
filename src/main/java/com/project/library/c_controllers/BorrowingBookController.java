@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @Controller
 public class BorrowingBookController {
@@ -39,7 +42,10 @@ public class BorrowingBookController {
     }
 
     @RequestMapping("/borrowingBookDetails")
-    public String borrowingBookDetails(@RequestParam("userId") int userId, Model model) {
+    public String borrowingBookDetails(@RequestParam("userId") int userId, Model model,
+                                       HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("id", userId);
         Optional<User> user = userDAO.findById(userId);
         List<Book> booksBorrowedByUser = user.get().getBookList();
         model.addAttribute("books", booksBorrowedByUser);
@@ -49,7 +55,10 @@ public class BorrowingBookController {
     @RequestMapping("/borrowingBookDetailsShowBooks")
     public ModelAndView borrowingBookDetailsShowBooks(
             @RequestParam("title") String title, @RequestParam("authorNS") String authorNS,
-            @RequestParam("libraryNumber") String libraryNumber) {
+            @RequestParam("libraryNumber") String libraryNumber, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+
+        OptionalInt userId = (OptionalInt) session.getAttribute("id");
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber);
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
