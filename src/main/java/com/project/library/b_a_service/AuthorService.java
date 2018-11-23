@@ -64,7 +64,6 @@ public class AuthorService {
         for (Map.Entry<List<Book>, Integer> entry : map.entrySet()) {
             if (entry.getValue() == max) {
                 bookList = entry.getKey();
-                System.out.println(bookList);
             }
         }
         final List<Book> bookList1 = bookList;
