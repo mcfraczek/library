@@ -56,10 +56,14 @@ public class BorrowingBookController {
     @RequestMapping("/borrowingBookDetailsShowBooks")
     public ModelAndView borrowingBookDetailsShowBooks(
             @RequestParam("title") String title, @RequestParam("authorNS") String authorNS,
-            @RequestParam("libraryNumber") String libraryNumber, HttpServletRequest request) {
+            @RequestParam("libraryNumber") String libraryNumber, @RequestParam("genre") String genre,
+            HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-//            int userId = (int) session.getAttribute("id");
+        int userId = (int) session.getAttribute("id");
+        Optional<User> user = userDAO.findById(userId);
+        user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
 
+        /*wypisz genre*/
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber);
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
