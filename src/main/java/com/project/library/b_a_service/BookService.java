@@ -17,6 +17,8 @@ public class BookService {
     private AuthorService authorService;
     @Autowired
     private EntityManager entityManager;
+    @Autowired
+    private BookService bookService;
 
     @Transactional
     public List<Book> find(String title, String authorNS, String libraryNumber) {
