@@ -1,6 +1,7 @@
 package com.project.library.a_entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "author")
+@EqualsAndHashCode
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +30,6 @@ public class Author {
             bookList = new ArrayList<>();
         }
         bookList.add(book);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Author author = (Author) o;
-
-        return id == author.id;
     }
 
     @Override
