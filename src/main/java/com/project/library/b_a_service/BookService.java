@@ -2,55 +2,71 @@ package com.project.library.b_a_service;
 
 import com.project.library.a_entity.Author;
 import com.project.library.a_entity.Book;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.project.library.b_DAO.BookDAO;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class BookService {
-    @Autowired
     private AuthorService authorService;
-    @Autowired
     private EntityManager entityManager;
-    @Autowired
-    private BookService bookService;
+    private BookDAO bookDAO;
+
+    private static boolean ifIwantThisBook(List<Author> authorList, Book book) {
+        for (Author author : authorList) {
+            if (!author.getBookList().contains(book)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Transactional
-    public List<Book> find(String title, String authorNS, String libraryNumber) {
+    public List<Book> find(String title, String authorNS, String libraryNumber, String genre) {
         List<Book> bookList = null;
-
-        if (authorNS.isEmpty() && libraryNumber.isEmpty()) {
-            bookList = findByTitle(title);
-        } else if (libraryNumber.isEmpty() && title.isEmpty()) {
+        /*jeśli nr biblioteczny jest - szukaj po nim
+         * potem nie jest brany pod uwagę*/
+        if (!libraryNumber.isEmpty()) {
+            bookList = bookDAO.findBooksByLibraryNumber(libraryNumber);
+        } else if (authorNS.isEmpty() && genre.equals("Choose...")) {
+            /*mamy tytuł*/
+            bookList = bookDAO.findBooksByTitle(title);
+        } else if (title.isEmpty() && genre.equals("Choose...")) {
+            /*mamy autorów*/
             List<Author> authorList = authorService.findByAuthor(authorNS);
-            bookList = new ArrayList<>();
-            for (Author author : authorList) {
-                List<Book> bookList1 = author.getBookList();
-                for (Book book : bookList1) {
-                    bookList.add(book);
-                }
-            }
+            bookList = authorList
+                    .stream()
+                    .flatMap(author -> author.getBookList()
+                            .stream())
+//                    .filter(b -> ifIwantThisBook(authorList, b))
+                    .collect(Collectors.toList());
+            System.out.println(authorList);
         } else if (title.isEmpty() && authorNS.isEmpty()) {
-            bookList = entityManager.createQuery("from Book b where b.libraryNumber=" + "'" + libraryNumber + "'"
-                    , Book.class).getResultList();
-        } else if (authorNS.isEmpty()) {
-            bookList = entityManager.createQuery("from Book b where b.title=" + "'" + title + "'" + "" +
-                    " and b.libraryNumber=" + "'" + libraryNumber + "'", Book.class).getResultList();
-        } else if (libraryNumber.isEmpty()) {
-            List<Book> bookList1 = entityManager.createQuery("from Book b where b.title=" + "'" + title + "'"
-                    , Book.class).getResultList();
+            /*mamy gatunki*/
+            bookList = bookDAO.findBooksByTypeListContains(genre);
+        } else if (true) {
+            /*jest tytuł i są autorzy*/
+        } else if (true) {
 
-            bookList = findByAuthor(authorNS, bookList1);
-        } else {
-            bookList = entityManager.createQuery("from Book b where b.title=" + "'" + title + "'" + "" +
-                    " and b.libraryNumber=" + "'" + libraryNumber + "'", Book.class).getResultList();
+            /*jest tytuł i jest gatunek*/
+        } else if (true) {
+            /*są autorzy i jest nrBiblioteczny*/
+        } else if (true) {
+            /*są autorzy i jest gatunek*/
+        } else if (true) {
+            /*jest nr biblioteczny i jest gatunek*/
+        } else if (true) {
+            /*jest tytuł, autorzy i nrBiblioteczny*/
+        } else if (true) {
+            /*jest tytuł autorzy i gatunek*/
         }
-        return bookList.stream().distinct().collect(Collectors.toList());
+        return bookList;
     }
 
     private List<Book> findByTitle(String title) {

@@ -12,11 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
     @Autowired
     private EntityManager entityManager;
+
+    public static List<Integer> getDuplicates(List<Integer> list) {
+        return list.stream()
+                .filter(x -> numbersOf(list, x) > 1)
+                .collect(Collectors.toList());
+    }
+
+    public static long numbersOf(List<Integer> list, int number) {
+        return list.stream().filter(x -> x == number).count();
+    }
 
     public List<Author> findByAuthor(String authorsNS) {
         List<AuthorHelper> authorHelperList = fromStringToSurnameName(authorsNS);
@@ -34,15 +45,7 @@ public class AuthorService {
         return authorList;
     }
 
-    private List<Author> eraseAuthorsWhoHaventWroteThisBook(List<Author> authorList) {
-         /*jeśli lista książek autora nie równa się ządnej liście książek żadenego autora.
-                Usuń tego autora */
-
-        return authorList;
-    }
-
-
-    private List<AuthorHelper> fromStringToSurnameName(String authorsSN) {
+    public List<AuthorHelper> fromStringToSurnameName(String authorsSN) {
         Pattern pattern = Pattern.compile("\\w+\\s\\w+");
         Matcher matcher = pattern.matcher(authorsSN);
         List<String> authorsList = new ArrayList<>();

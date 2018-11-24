@@ -64,7 +64,7 @@ public class BorrowingBookController {
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
 
         /*wypisz genre*/
-        List<Book> bookList = bookService.find(title, authorNS, libraryNumber);
+        List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
 }
