@@ -1,2 +1,2 @@
-https://stackoverflow.com/questions/13242394/spring-mvc-multiple-modelattribute-on-the-same-form
-http://forum.thymeleaf.org/I-have-problem-in-binding-the-list-of-objects-contained-inside-a-object-on-the-form-using-thymeleaf-td3525038.html
+Problem z autorami i tym, że nie pytam czy autor istnieje. Można albo z góry załozyć, że tak, ale wtedy nie może
+być dwóch autorów o tych samych nazwiskach, albo wybierać z listy po ich liście książek np

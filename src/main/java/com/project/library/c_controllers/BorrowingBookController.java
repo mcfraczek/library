@@ -44,10 +44,12 @@ public class BorrowingBookController {
     @RequestMapping("/borrowingBookDetails")
     public String borrowingBookDetails(@RequestParam("userId") int userId, Model model,
                                        HttpServletRequest request) {
+        /*Biorę id urzytkownika, biorę książkim które wyporzyczył i zapisuję id so sesji na przyszłość*/
         HttpSession session = request.getSession();
         session.setAttribute("id", userId);
         Optional<User> user = userDAO.findById(userId);
-        BooksPlusList booksPlusList = new BooksPlusList(user.get().getBookList());
+        BooksPlusList booksPlusList = new BooksPlusList();
+        user.ifPresent(u -> booksPlusList.setBookList(u.getBookList()));
 
         model.addAttribute("books", booksPlusList);
         return "borrowingBookDetails";
@@ -58,13 +60,27 @@ public class BorrowingBookController {
             @RequestParam("title") String title, @RequestParam("authorNS") String authorNS,
             @RequestParam("libraryNumber") String libraryNumber, @RequestParam("genre") String genre,
             HttpServletRequest request, Model model) {
+        /*Nadal potrzebuję listy książek, więc biorę ją już z sesji*/
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userDAO.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
 
-        /*wypisz genre*/
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
+        /*zapisz parametry do sesji dla przyszłej strony*/
+
+
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
+
+    @RequestMapping("/borrowingBookDetailsShowBooksBorrow")
+    public String borrowingBookDetailsShowBooksBorrow(@RequestParam("borrowedId") String borrowedId,
+                                                      HttpSession session) {
+        int userId = (int) session.getAttribute("id");
+        /*get user*/
+        /*check if he has that book*/
+        /*Set this book to this user*/
+        return "borrowingBookDetails";
+    }
+
 }
