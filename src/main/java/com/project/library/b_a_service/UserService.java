@@ -69,6 +69,7 @@ public class UserService {
         Optional<Book> book = bookDAO.findById(borrowedId);
         if (book.isPresent() && user.isPresent()) {
             user.get().addBook(book.get());
+            book.get().setUser(user.get());
         }
     }
 }
