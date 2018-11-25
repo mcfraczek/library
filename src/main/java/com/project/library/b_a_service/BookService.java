@@ -27,7 +27,7 @@ public class BookService {
         return true;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)/*tylko do czytania*/
     public List<Book> find(String title, String authorNS, String libraryNumber, String genre) {
         List<Book> bookList = null;
         /*jeśli nr biblioteczny jest - szukaj po nim
