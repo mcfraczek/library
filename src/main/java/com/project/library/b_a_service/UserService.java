@@ -1,6 +1,8 @@
 package com.project.library.b_a_service;
 
+import com.project.library.a_entity.Book;
 import com.project.library.a_entity.User;
+import com.project.library.b_DAO.BookDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,11 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private BookDAO bookDAO;
+
 
     @Transactional
     public List<User> showUsers(String name, String surname) {
@@ -50,4 +57,18 @@ public class UserService {
         return userList;
     }
 
+    public boolean checkIfHeHasThatBook(Optional<User> user, int borrowedId) {
+        return user.map(x -> x.getBookList()
+                .stream()
+                .filter(b -> b.getId() == borrowedId)
+                .count() > 0).orElse(false);
+    }
+
+    @Transactional
+    public void setBook(int borrowedId, Optional<User> user) {
+        Optional<Book> book = bookDAO.findById(borrowedId);
+        if (book.isPresent() && user.isPresent()) {
+            user.get().addBook(book.get());
+        }
+    }
 }

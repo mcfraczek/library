@@ -104,10 +104,9 @@
                     <th scope="col">Title</th>
                     <th scope="col">Library Number</th>
                     <td class="w-25 mr-0 text-right">
-                        <!--<p th:text="${#request.getParameter('q')}" th:unless="${#request.getParameter('q') == null}"-->
-                        <!--<a th:href="@{__${#httpServletRequest.requestURI}__/store/__${store.name}__}">Click to More</a>-->
                         <a class="btn btn-light mr-3"
-                           th:href="@{/borrowingBookDetailsShowBooksBorrow(authorNS=${#request.getParameter('authorNS')})(borrowedId=${bl.id})}"
+                           th:href="@{/borrowingBookDetailsShowBooksBorrow(title=${#request.getParameter('title')},
+                           authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
                            th:unless="${#request.getParameter('authorNS'==null)}">Borrow/Return</a>
                     </td>
                 </tr>

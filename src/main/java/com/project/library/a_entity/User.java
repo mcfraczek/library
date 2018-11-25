@@ -3,6 +3,7 @@ package com.project.library.a_entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 @Data
 @Entity
@@ -23,4 +24,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     private List<Book> bookList;
+
+    public void addBook(Book book) {
+        if (bookList == null) {
+            bookList = new ArrayList<>();
+        } else {
+            bookList.add(book);
+        }
+    }
 }

@@ -50,20 +50,13 @@ public class BookService {
             /*mamy gatunki*/
             bookList = bookDAO.findBooksByTypeListContains(genre);
         } else if (true) {
-            /*jest tytuł i są autorzy*/
+            /*mamy tytuł i autora  gatunku, nie mamy gatunku*/
         } else if (true) {
-
-            /*jest tytuł i jest gatunek*/
+            /*mamy tytuł i gatunek, nie mamy autora */
         } else if (true) {
-            /*są autorzy i jest nrBiblioteczny*/
+            /*mamy autora i gatunek, nie mamy tytułu*/
         } else if (true) {
-            /*są autorzy i jest gatunek*/
-        } else if (true) {
-            /*jest nr biblioteczny i jest gatunek*/
-        } else if (true) {
-            /*jest tytuł, autorzy i nrBiblioteczny*/
-        } else if (true) {
-            /*jest tytuł autorzy i gatunek*/
+            /*mamy tytuł autora i gatunek*/
         }
         return bookList;
     }

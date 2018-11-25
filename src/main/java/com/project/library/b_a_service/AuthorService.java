@@ -1,6 +1,7 @@
 package com.project.library.b_a_service;
 
 import com.project.library.a_entity.Author;
+import com.project.library.b_DAO.AuthorDAO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class AuthorService {
     @Autowired
     private EntityManager entityManager;
+    @Autowired
+    private AuthorDAO authorDAO;
 
     public static List<Integer> getDuplicates(List<Integer> list) {
         return list.stream()
@@ -30,6 +33,7 @@ public class AuthorService {
     }
 
     public List<Author> findByAuthor(String authorsNS) {
+
         List<AuthorHelper> authorHelperList = fromStringToSurnameName(authorsNS);
         List<Author> authorList = new ArrayList<>();
 
@@ -41,11 +45,10 @@ public class AuthorService {
             authorList.addAll(helper);
         }
 
-//        authorList = eraseAuthorsWhoHaventWroteThisBook(authorList);
         return authorList;
     }
 
-    public List<AuthorHelper> fromStringToSurnameName(String authorsSN) {
+    private List<AuthorHelper> fromStringToSurnameName(String authorsSN) {
         Pattern pattern = Pattern.compile("\\w+\\s\\w+");
         Matcher matcher = pattern.matcher(authorsSN);
         List<String> authorsList = new ArrayList<>();

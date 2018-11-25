@@ -59,9 +59,8 @@ public class BorrowingBookController {
     public ModelAndView borrowingBookDetailsShowBooks(
             @RequestParam("title") String title, @RequestParam("authorNS") String authorNS,
             @RequestParam("libraryNumber") String libraryNumber, @RequestParam("genre") String genre,
-            HttpServletRequest request, Model model) {
+            HttpSession session, Model model) {
         /*Nadal potrzebuję listy książek, więc biorę ją już z sesji*/
-        HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userDAO.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
@@ -69,17 +68,32 @@ public class BorrowingBookController {
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         /*zapisz parametry do sesji dla przyszłej strony*/
 
-
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
 
     @RequestMapping("/borrowingBookDetailsShowBooksBorrow")
-    public String borrowingBookDetailsShowBooksBorrow(@RequestParam("borrowedId") String borrowedId,
-                                                      HttpSession session) {
+    public String borrowingBookDetailsShowBooksBorrow(@RequestParam("borrowedId") int borrowedId,
+                                                      @RequestParam("title") String title,
+                                                      @RequestParam("authorNS") String authorNS,
+                                                      @RequestParam("libraryNumber") String libraryNumber,
+                                                      @RequestParam("genre") String genre,
+                                                      HttpSession session, Model model) {
+
         int userId = (int) session.getAttribute("id");
+        Optional<User> user = userDAO.findById(userId);
+        boolean heHas = userService.checkIfHeHasThatBook(user, borrowedId);
+        if (!heHas) {
+            userService.setBook(borrowedId, user);
+        }
+        System.out.println("book added");
         /*get user*/
         /*check if he has that book*/
         /*Set this book to this user*/
+
+        /*ze statych*/
+        user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
+        List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
+        model.addAttribute("booklist", bookList);
         return "borrowingBookDetails";
     }
 
