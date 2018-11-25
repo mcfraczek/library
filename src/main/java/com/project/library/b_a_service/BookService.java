@@ -46,7 +46,6 @@ public class BookService {
                             .stream())
 //                    .filter(b -> ifIwantThisBook(authorList, b))
                     .collect(Collectors.toList());
-            System.out.println(authorList);
         } else if (title.isEmpty() && authorNS.isEmpty()) {
             /*mamy gatunki*/
             bookList = bookDAO.findBooksByTypeListContains(genre);

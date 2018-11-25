@@ -15,7 +15,6 @@ public interface BookDAO extends CrudRepository<Book, Integer> {
 
     List<Book> findBooksByTypeListContains(String type);
 
-    @Query
+    @Query(value = "")
     List<Book> findBooksByAuthorListContains(List<Author> authorList);
-
 }

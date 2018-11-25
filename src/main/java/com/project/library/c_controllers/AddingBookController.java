@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AddingBookController {
     @Autowired
-    private BookDAO bookService;
+    private BookDAO bookDEO;
 
     @RequestMapping("/addBook")
     public ModelAndView showForm(BookPlusList book) {
@@ -19,8 +19,8 @@ public class AddingBookController {
     }
 
     @RequestMapping("/processAddBookForm")
-    public String processForm(@ModelAttribute("book") BookPlusList book) {
-        bookService.save(book.getBook());
+    public String processForm(@ModelAttribute("book") BookPlusList bookPlusList) {
+        bookDEO.save(bookPlusList.getBook()); /* jeśli nazwisko autora się pojawi - to problem trzeba to zmienić*/
         return "bookSaved";
     }
 }

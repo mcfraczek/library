@@ -35,11 +35,7 @@ $("#authors").on("click", ".deleteAuthor", function () {
 });
 
 /*nadzieja na uporządkowanie przed wysłaniem*/
-/*$('input[type="submit"]').on("click", function () {
-
-});*/
-
-$("#s").on("click", function () {
+$('input[type="submit"]').on("click", function () {
     for (var i = 0; i < authorCount; i++) {
         var html = $("#authors .form-row:eq(" + i + ")").html();
         $("#authors .form-row:eq(" + i + ")").html(change2(html, i + 1));

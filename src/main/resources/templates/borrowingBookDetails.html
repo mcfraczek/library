@@ -104,7 +104,9 @@
                     <th scope="col">Title</th>
                     <th scope="col">Library Number</th>
                     <td class="w-25 mr-0 text-right">
-                        <a class="btn btn-light mr-3">Borrow/Return</a>
+                        <!--<a th:href="@{__${#httpServletRequest.requestURI}__/store/__${store.name}__}">Click to More</a>-->
+                        <a class="btn btn-light mr-3"
+                           th:href="@{/borrowingBookDetailsShowBooksBorrow(borrowedId=${bl.id})}">Borrow/Return</a>
                     </td>
                 </tr>
                 </thead>
@@ -117,6 +119,7 @@
                         <!--<a class="btn btn-light mr-3">Borrow/Return</a>-->
                     </td>
                 </tr>
+                </tbody>
             </table>
 
             <div class="row">
