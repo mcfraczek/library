@@ -27,11 +27,20 @@
         </tr>
         </thead>
         <tbody>
+        <!--th:with="valueNames=${T(com.mypackage.CollectorsMap).name(values.stream())}"-->
         <tr th:each="b : ${books.bookList}">
             <th scope="row" th:text="${books.bookList.indexOf(b)+1}">1</th>
             <td th:text="${b.title}">W pustyni i w puszczy</td>
-            <td th:each="a : ${b.authorList}">
-                <span th:text="${a.name+' '+ a.surname}">Henryk Sienkiewicz</span>
+            <td>
+                <span th:text="${T(com.project.library.ab_helperBackingBeans.methods.Concatinating).concatinate(b.authorList)}"></span>
+
+                <!--  <span th:each="a : ${b.authorList}"><span th:if="${b.authorList.size()<2}"><span
+                          th:text="${a.name+' '+ a.surname}">Henryk Sienkiewicz</span></span>
+                  <span th:if="${b.authorList.size()>1}">
+                      <span th:if="${b.authorList.stream()}"></span>
+                      <span th:text="${a.name+' '+ a.surname+', '}">Henryk Sienkiewicz</span>
+                  </span>
+                  </span>-->
             </td>
             <td th:text="${b.libraryNumber}">79979898779787878</td>
         </tr>
