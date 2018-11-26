@@ -3,9 +3,8 @@ package com.project.library.c_controllers;
 import com.project.library.a_entity.Book;
 import com.project.library.a_entity.User;
 import com.project.library.ab_helperBackingBeans.book.BooksPlusList;
-import com.project.library.b_DAO.UserDAO;
-import com.project.library.b_a_service.BookService;
-import com.project.library.b_a_service.UserService;
+import com.project.library.b_b_service.BookService;
+import com.project.library.b_b_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +19,8 @@ import java.util.Optional;
 
 @Controller
 public class BorrowingBookController {
-
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserDAO userDAO;
     @Autowired
     private BookService bookService;
 
@@ -47,7 +43,7 @@ public class BorrowingBookController {
         /*Biorę id urzytkownika, biorę książkim które wyporzyczył i zapisuję id so sesji na przyszłość*/
         HttpSession session = request.getSession();
         session.setAttribute("id", userId);
-        Optional<User> user = userDAO.findById(userId);
+        Optional<User> user = userService.findById(userId);
         BooksPlusList booksPlusList = new BooksPlusList();
         user.ifPresent(u -> booksPlusList.setBookList(u.getBookList()));
 
@@ -62,7 +58,7 @@ public class BorrowingBookController {
             HttpSession session, Model model) {
         /*Nadal potrzebuję listy książek, więc biorę ją już z sesji*/
         int userId = (int) session.getAttribute("id");
-        Optional<User> user = userDAO.findById(userId);
+        Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
 
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
@@ -80,7 +76,7 @@ public class BorrowingBookController {
                                                       HttpSession session, Model model) {
 
         int userId = (int) session.getAttribute("id");
-        Optional<User> user = userDAO.findById(userId);
+        Optional<User> user = userService.findById(userId);
         boolean heHas = userService.checkIfHeHasThatBook(user, borrowedId);
         if (!heHas) {
             userService.setBook(borrowedId, user);

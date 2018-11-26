@@ -1,8 +1,9 @@
-package com.project.library.b_a_service;
+package com.project.library.b_b_service;
 
 import com.project.library.a_entity.Book;
 import com.project.library.a_entity.User;
-import com.project.library.b_DAO.BookDAO;
+import com.project.library.b_a_DAO.BookDAO;
+import com.project.library.b_a_DAO.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +19,9 @@ import java.util.Optional;
 @Service
 public class UserService {
     @Autowired
+    private UserDAO userDAO;
+    @Autowired
     private EntityManager entityManager;
-
     @Autowired
     private BookDAO bookDAO;
 
@@ -75,5 +77,13 @@ public class UserService {
             book.get().setDate(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
             book.get().setUser(user.get());
         }
+    }
+
+    public void saveUser(User user) {
+        userDAO.save(user);
+    }
+
+    public Optional<User> findById(int userId) {
+        return userDAO.findById(userId);
     }
 }
