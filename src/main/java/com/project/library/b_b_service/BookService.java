@@ -2,6 +2,7 @@ package com.project.library.b_b_service;
 
 import com.project.library.a_entity.Author;
 import com.project.library.a_entity.Book;
+import com.project.library.a_entity.Type;
 import com.project.library.b_a_DAO.BookDAO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class BookService {
     private AuthorService authorService;
     private EntityManager entityManager;
     private BookDAO bookDAO;
+    private TypeService typeService;
 
     private static boolean ifIwantThisBook(List<Author> authorList, Book book) {
         for (Author author : authorList) {
@@ -96,11 +98,18 @@ public class BookService {
                 return theAuthorOptional.get();
             }
             return author;
-        }).map(author -> {
-
-
         }).collect(Collectors.toList());
         book.setAuthorList(authorList);
+
+        List<Type> typeList = book.getTypeList().stream().map(type -> {
+            Optional<Type> typeOptional = typeService.findTypeByType(type.getType());
+            if (typeOptional.isPresent()) {
+                return typeOptional.get();
+            }
+            return type;
+        }).collect(Collectors.toList());
+
+        book.setTypeList(typeList);
         bookDAO.save(book);
     }
 }
