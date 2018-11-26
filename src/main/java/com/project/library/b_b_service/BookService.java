@@ -90,8 +90,6 @@ public class BookService {
 
     @Transactional
     public void saveBook(Book book) {
-        System.out.println(book.getAuthorList());
-
         List<Author> authorList = book.getAuthorList().stream().map(author -> {
             Optional<Author> theAuthorOptional = authorService.findAuthorByNameAndSurname
                     (author.getName(), author.getSurname());
