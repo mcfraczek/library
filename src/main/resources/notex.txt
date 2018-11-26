@@ -1,2 +1,3 @@
-Problem z autorami i tym, że nie pytam czy autor istnieje. Można albo z góry załozyć, że tak, ale wtedy nie może
-być dwóch autorów o tych samych nazwiskach, albo wybierać z listy po ich liście książek np
+Problem dublowania we wszystkich typach many to many
+Problem dobrego przesiewu w wyszukiwaniu
+problem zrobiania normalnej wizualziacji

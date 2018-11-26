@@ -1,7 +1,7 @@
-package com.project.library.b_a_service;
+package com.project.library.b_b_service;
 
 import com.project.library.a_entity.Author;
-import com.project.library.b_DAO.AuthorDAO;
+import com.project.library.b_a_DAO.AuthorDAO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
@@ -22,13 +22,13 @@ public class AuthorService {
     @Autowired
     private AuthorDAO authorDAO;
 
-    public static List<Integer> getDuplicates(List<Integer> list) {
+    private static List<Integer> getDuplicates(List<Integer> list) {
         return list.stream()
                 .filter(x -> numbersOf(list, x) > 1)
                 .collect(Collectors.toList());
     }
 
-    public static long numbersOf(List<Integer> list, int number) {
+    private static long numbersOf(List<Integer> list, int number) {
         return list.stream().filter(x -> x == number).count();
     }
 

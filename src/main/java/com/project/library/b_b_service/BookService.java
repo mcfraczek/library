@@ -1,8 +1,8 @@
-package com.project.library.b_a_service;
+package com.project.library.b_b_service;
 
 import com.project.library.a_entity.Author;
 import com.project.library.a_entity.Book;
-import com.project.library.b_DAO.BookDAO;
+import com.project.library.b_a_DAO.BookDAO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,5 +84,15 @@ public class BookService {
         List<Book> bookList = entityManager.createQuery("from Book b where b.libraryNumber=" + "'" + libraryNumber + "'", Book.class)
                 .getResultList();
         return bookList;
+    }
+
+    public void saveBook(Book book) {
+        /*znaleźć autorów książki, jeśli się jakiś pokrywa- to dodać
+         * znajdź autorów z bazy danych */
+
+        List<Author> authorList = book.getAuthorList();
+        for (Author author : authorList) {
+
+        }
     }
 }
