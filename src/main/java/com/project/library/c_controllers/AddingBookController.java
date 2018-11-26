@@ -20,7 +20,6 @@ public class AddingBookController {
 
     @RequestMapping("/processAddBookForm")
     public String processForm(@ModelAttribute("book") BookPlusList bookPlusList) {
-        /* jeśli nazwisko autora się pojawi - to problem trzeba to zmienić*/
         bookService.saveBook(bookPlusList.getBook());
         return "bookSaved";
     }
