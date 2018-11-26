@@ -30,7 +30,7 @@ public class BookService {
         return true;
     }
 
-    @Transactional(readOnly = true)/*tylko do czytania*/
+    @Transactional/*(readOnly = true)*//*tylko do czytania*/
     public List<Book> find(String title, String authorNS, String libraryNumber, String genre) {
         List<Book> bookList = null;
         /*jeśli nr biblioteczny jest - szukaj po nim
@@ -50,9 +50,9 @@ public class BookService {
 //                    .filter(b -> ifIwantThisBook(authorList, b))
                     .collect(Collectors.toList());
         } else if (title.isEmpty() && authorNS.isEmpty()) {
-            /*mamy gatunki*/
             bookList = bookDAO.findBooksByTypeListContains(genre);
-        } else if (true) {
+        } else if (genre.isEmpty()) {
+            bookList = bookDAO.findBooksByTitleAndAuthorList(title, authorService.findByAuthor(authorNS));
             /*mamy tytuł i autora  gatunku, nie mamy gatunku*/
         } else if (true) {
             /*mamy tytuł i gatunek, nie mamy autora */
@@ -72,7 +72,6 @@ public class BookService {
         return bookList;
     }
 
-    /*jeśli któraś z list autorów z listy książek będzie się zgadzała - zostaw te książki*/
     private List<Book> findByAuthor(String authorSurname, List<Book> bookList) {
         List<Author> authorList = authorService.findByAuthor(authorSurname);
 
@@ -91,6 +90,8 @@ public class BookService {
 
     @Transactional
     public void saveBook(Book book) {
+        System.out.println(book.getAuthorList());
+
         List<Author> authorList = book.getAuthorList().stream().map(author -> {
             Optional<Author> theAuthorOptional = authorService.findAuthorByNameAndSurname
                     (author.getName(), author.getSurname());

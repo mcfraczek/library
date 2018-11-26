@@ -2,7 +2,6 @@ package com.project.library.b_a_DAO;
 
 import com.project.library.a_entity.Author;
 import com.project.library.a_entity.Book;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -15,7 +14,5 @@ public interface BookDAO extends CrudRepository<Book, Integer> {
 
     List<Book> findBooksByTypeListContains(String type);
 
-
-    @Query(value = "")
-    List<Book> findBooksByAuthorListContains(List<Author> authorList);
+    List<Book> findBooksByTitleAndAuthorList(String string, List<Author> authorList);
 }
