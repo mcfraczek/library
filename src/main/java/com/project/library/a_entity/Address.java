@@ -25,23 +25,6 @@ public class Address {
     private String city;
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserDetails> userList;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Address address = (Address) o;
-
-        if (street != null ? !street.equals(address.street) : address.street != null) return false;
-        if (streetNumber != null ? !streetNumber.equals(address.streetNumber) : address.streetNumber != null)
-            return false;
-        if (apartmentNumber != null ? !apartmentNumber.equals(address.apartmentNumber) : address.apartmentNumber != null)
-            return false;
-        if (county != null ? !county.equals(address.county) : address.county != null) return false;
-        if (postalCode != null ? !postalCode.equals(address.postalCode) : address.postalCode != null) return false;
-        return city != null ? city.equals(address.city) : address.city == null;
-    }
 }
 
 

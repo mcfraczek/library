@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -32,12 +31,5 @@ public class Author {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
-    }
-
-    public void addBook(Book book) {
-        if (bookList == null) {
-            bookList = new ArrayList<>();
-        }
-        bookList.add(book);
     }
 }
