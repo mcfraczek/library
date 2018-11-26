@@ -35,13 +35,11 @@ $("#authors").on("click", ".deleteAuthor", function () {
 });
 
 $('input[type="submit"]').on("click", function () {
-    alert("clicked");
     for (var i = 0; i < authorCount; i++) {
         var html = $("#authors .form-row:eq(" + i + ")").html();
         $("#authors .form-row:eq(" + i + ")").html(change2(html, i + 1));
     }
 });
-
 function change2(input, number) {
     var reg = /\[(\d+)\]/g;
     return input.replace(reg, '[' + number + ']');
