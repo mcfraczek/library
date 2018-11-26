@@ -85,7 +85,6 @@ public class BorrowingBookController {
         if (!heHas) {
             userService.setBook(borrowedId, user);
         }
-        System.out.println("book added");
         /*get user*/
         /*check if he has that book*/
         /*Set this book to this user*/
