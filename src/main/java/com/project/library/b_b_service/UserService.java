@@ -1,10 +1,12 @@
 package com.project.library.b_b_service;
 
+import com.project.library.a_entity.Address;
 import com.project.library.a_entity.Book;
 import com.project.library.a_entity.User;
+import com.project.library.b_a_DAO.AddressDEO;
 import com.project.library.b_a_DAO.BookDAO;
 import com.project.library.b_a_DAO.UserDAO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,13 +17,12 @@ import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class UserService {
-    @Autowired
     private UserDAO userDAO;
-    @Autowired
     private BookDAO bookDAO;
-
+    private AddressDEO addressDEO;
 
     public List<User> getUsers(@RequestParam("name") String name, @RequestParam("surname") String surname) {
         List<User> userList;
@@ -53,6 +54,18 @@ public class UserService {
     }
 
     public void saveUser(User user) {
+        String street = user.getUserDetails().getAddress().getStreet();
+        String streetNr = user.getUserDetails().getAddress().getStreetNumber();
+        String apartmentNumber = user.getUserDetails().getAddress().getApartmentNumber();
+        String county = user.getUserDetails().getAddress().getCounty();
+        String postalCode = user.getUserDetails().getAddress().getPostalCode();
+        String city = user.getUserDetails().getAddress().getCity();
+
+        Optional<Address> addressOptional = addressDEO.findAddressByStreetAndStreetNumberAndApartmentNumberAndCountyAndPostalCodeAndCity(street, streetNr, apartmentNumber, county, postalCode, city);
+
+        if (addressOptional.isPresent()) {
+            user.getUserDetails().setAddress(addressOptional.get());
+        }
         userDAO.save(user);
     }
 
