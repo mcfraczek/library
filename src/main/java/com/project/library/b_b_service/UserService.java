@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -21,43 +20,17 @@ public class UserService {
     @Autowired
     private UserDAO userDAO;
     @Autowired
-    private EntityManager entityManager;
-    @Autowired
     private BookDAO bookDAO;
 
-
-    @Transactional
-    public List<User> showUsers(String name, String surname) {
-        List<User> userList = entityManager.createQuery
-                ("from User u where u.name='" + name + "' and u.surname=" + "'" + surname + "'", User.class)
-                .getResultList();
-        return userList;
-    }
-
-    @Transactional
-    public List<User> showUsersByName(String name) {
-        List<User> userList = entityManager.createQuery
-                ("from User u where u.name='" + name + "'", User.class)
-                .getResultList();
-        return userList;
-    }
-
-    @Transactional
-    public List<User> showUsersBySurname(String surname) {
-        List<User> userList = entityManager.createQuery
-                ("from User u where u.surname=" + "'" + surname + "'", User.class)
-                .getResultList();
-        return userList;
-    }
 
     public List<User> getUsers(@RequestParam("name") String name, @RequestParam("surname") String surname) {
         List<User> userList;
         if (name.isEmpty()) {
-            userList = showUsersBySurname(surname);
+            userList = userDAO.findUserBySurname(surname);
         } else if (surname.isEmpty()) {
-            userList = showUsersByName(name);
+            userList = userDAO.findUserByName(name);
         } else {
-            userList = showUsers(name, surname);
+            userList = userDAO.findUserByNameAndSurname(name, surname);
         }
         return userList;
     }
