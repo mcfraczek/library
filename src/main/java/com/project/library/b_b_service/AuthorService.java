@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -30,6 +31,10 @@ public class AuthorService {
 
     private static long numbersOf(List<Integer> list, int number) {
         return list.stream().filter(x -> x == number).count();
+    }
+
+    Optional<Author> findAuthorByNameAndSurname(String name, String surname) {
+        return authorDAO.findAuthorByNameAndSurname(name, surname);
     }
 
     public List<Author> findByAuthor(String authorsNS) {

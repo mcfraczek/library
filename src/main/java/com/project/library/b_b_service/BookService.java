@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -86,13 +87,20 @@ public class BookService {
         return bookList;
     }
 
+    @Transactional
     public void saveBook(Book book) {
-        /*znaleźć autorów książki, jeśli się jakiś pokrywa- to dodać
-         * znajdź autorów z bazy danych */
+        List<Author> authorList = book.getAuthorList().stream().map(author -> {
+            Optional<Author> theAuthorOptional = authorService.findAuthorByNameAndSurname
+                    (author.getName(), author.getSurname());
+            if (theAuthorOptional.isPresent()) {
+                return theAuthorOptional.get();
+            }
+            return author;
+        }).map(author -> {
 
-        List<Author> authorList = book.getAuthorList();
-        for (Author author : authorList) {
 
-        }
+        }).collect(Collectors.toList());
+        book.setAuthorList(authorList);
+        bookDAO.save(book);
     }
 }
