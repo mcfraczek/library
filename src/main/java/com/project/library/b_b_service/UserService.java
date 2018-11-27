@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +46,7 @@ public class UserService {
         Optional<Book> book = bookService.findBookById(borrowedId);
         if (book.isPresent() && user.isPresent()) {
             user.get().addBook(book.get());
-            book.get().setDate(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+            book.get().setDate(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
             book.get().setUser(user.get());
         }
     }

@@ -37,7 +37,12 @@
                 </span>
             </td>
             <td th:text="${b.libraryNumber}">79979898779787878</td>
-            <td th:text="${b.date}" id="date">13-03-2019</td>
+            <td>
+                <span th:text="${b.date}" id="date">13-03-2019</span>
+                <span th:if="${T(com.project.library.ab_helperBackingBeans.methods.DateChecking).thereIsAFine(b.date)}">
+                PAY!
+            </span>
+            </td>
         </tr>
     </table>
     <h3 class="text-center text-light mb-3">Search For Book</h3>

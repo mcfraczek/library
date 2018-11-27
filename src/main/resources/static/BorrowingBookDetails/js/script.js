@@ -9,8 +9,8 @@ function dateToRed() {
     /*converting ms to day*/
     var day = 3600000 * 24;
     var numberOfDays = Math.floor((dateNow - dateFromHtml) / day);
-    if (numberOfDays > 1) {
-        $("#date").addClass("red");
+    if (numberOfDays === 0) {
+        $("#date").parent().addClass("red");
     }
 }
 
