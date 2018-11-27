@@ -48,7 +48,7 @@
                    th:href="@{/borrowingBookDetailsReturn(title=${#request.getParameter('title')},
                            authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},
                            genre=${#request.getParameter('genre')},returnedId=${b.id})}"
-                   th:unless="${#request.getParameter('authorNS'==null)}">Return</a>
+                   th:unless="${#request.getParameter('title'==null)}">Return</a>
             </td>
         </tr>
     </table>
@@ -123,8 +123,9 @@
                     <td class="w-25 mr-0 text-right">
                         <a class="btn btn-light mr-3"
                            th:href="@{/borrowingBookDetailsShowBooksBorrow(title=${#request.getParameter('title')},
-                           authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
-                           th:unless="${#request.getParameter('authorNS'==null)}">Borrow</a>
+                           authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},
+                           genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
+                           th:unless="${#request.getParameter('title'==null)}">Borrow</a>
                     </td>
                 </tr>
                 </thead>
