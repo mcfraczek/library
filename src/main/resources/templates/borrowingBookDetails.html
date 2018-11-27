@@ -123,11 +123,14 @@
                     <th scope="col">Title</th>
                     <th scope="col">Library Number</th>
                     <td class="w-25 mr-0 text-right">
-                        <a class="btn btn-light mr-3"
+                        <a th:if="${bl.date==null}" class="btn btn-light mr-3"
                            th:href="@{/borrowingBookDetailsShowBooksBorrow(title=${#request.getParameter('title')},
                            authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},
                            genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
                            th:unless="${#request.getParameter('title'==null)}">Borrow</a>
+                        <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
+                                th:text="${'Borrowed '+bl.date}">
+                        </button>
                     </td>
                 </tr>
                 </thead>
@@ -136,8 +139,7 @@
                     <th scope="row"></th>
                     <td th:text="${bl.title}">W Pustyni i W Puszczy</td>
                     <td th:text="${bl.libraryNumber}">7927847843943934</td>
-                    <td class="w-25 mr-0 text-right">
-                    </td>
+                    <td class="w-25 mr-0 text-right"></td>
                 </tr>
                 </tbody>
             </table>
