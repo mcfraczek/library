@@ -38,7 +38,7 @@
             </td>
             <td th:text="${b.libraryNumber}">79979898779787878</td>
             <td class="d-flex justify-content-around">
-                <span th:text="${b.date}" id="date">13-03-2019</span>
+                <span th:text="${b.date}" class="date">13-03-2019</span>
                 <span th:if="${T(com.project.library.ab_helperBackingBeans.methods.DateChecking).thereIsAFine(b.date)}">
                 <button class="btn btn-outline-light btn-sm">Add Fine To Session</button>
             </span>
