@@ -47,7 +47,7 @@ public class BookService {
                     .stream()
                     .flatMap(author -> author.getBookList()
                             .stream())
-//                    .filter(b -> ifIwantThisBook(authorList, b))
+                    .filter(b -> ifIwantThisBook(authorList, b)).distinct()
                     .collect(Collectors.toList());
         } else if (title.isEmpty() && authorNS.isEmpty()) {
             bookList = bookDAO.findBooksByTypeListContains(genre);

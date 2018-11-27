@@ -33,14 +33,24 @@ $("#authors").on("click", ".deleteAuthor", function () {
     authorCount--;
     $(this).parent().parent().remove();
 });
-
+/*
 $('input[type="submit"]').on("click", function () {
+    var html;
     for (var i = 0; i < authorCount; i++) {
-        var html = $("#authors .form-row:eq(" + i + ")").html();
+        html = $("#authors .form-row:eq(" + i + ")").html();
         $("#authors .form-row:eq(" + i + ")").html(change2(html, i + 1));
     }
+    alert(html);
+});*/
+/*$("#submit").on("click", function () {
+    var html;
+    for (var i = 0; i < authorCount; i++) {
+        html = $("#authors .form-row:eq(" + i + ")").html();
+        $("#authors .form-row:eq(" + i + ")").html(change2(html, i + 1));
+    }
+    alert(html);
 });
 function change2(input, number) {
     var reg = /\[(\d+)\]/g;
     return input.replace(reg, '[' + number + ']');
-}
+}*/
