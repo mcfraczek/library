@@ -1,4 +1,4 @@
-Problem dobrego przesiewu w wyszukiwaniu
 problem zrobiania normalnej wizualziacji
 problem z dodawaniem w j.querry
 Kreskę naprawisz jeśli dasz wszędzie wymiar duży
+funcjonalność zliczania kary
