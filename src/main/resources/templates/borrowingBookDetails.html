@@ -128,12 +128,13 @@
                            authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},
                            genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
                            th:unless="${#request.getParameter('title'==null)}">Borrow</a>
-                        <span th:if="${bl.user.id==#session.getAttribute('id')}">
+
+                        <span th:if="${#session.getAttribute('id')==bl.user.id}">
                           <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
                                   th:text="${'Borrowed by this user '+bl.date}">
                         </button>
                       </span>
-                        <span th:if="${bl.user.id!=#session.getAttribute('id')}">
+                        <span th:if="${#session.getAttribute('id')!=bl.user.id}">
                             <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
                                     th:text="${'Borrowed '+bl.date}">
                         </button>
