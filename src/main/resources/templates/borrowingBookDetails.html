@@ -25,6 +25,7 @@
             <th scope="col">Authors</th>
             <th scope="col">Library Number</th>
             <th scope="col">Borrowed</th>
+            <th scope="col">Return</th>
         </tr>
         </thead>
         <tbody>
@@ -42,8 +43,12 @@
                 <button class="btn btn-outline-light btn-sm">Add Fine To Session</button>
             </span>
             </td>
+            <td>
+                <button class="btn btn-light">Return</button>
+            </td>
         </tr>
     </table>
+
     <h3 class="text-center text-light mb-3">Search For Book</h3>
     <nav class="navbar navbar-light bg-light">
         <form class="form-inline justify-content-around" th:action="@{/borrowingBookDetailsShowBooks}">
@@ -115,7 +120,7 @@
                         <a class="btn btn-light mr-3"
                            th:href="@{/borrowingBookDetailsShowBooksBorrow(title=${#request.getParameter('title')},
                            authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
-                           th:unless="${#request.getParameter('authorNS'==null)}">Borrow/Return</a>
+                           th:unless="${#request.getParameter('authorNS'==null)}">Borrow</a>
                     </td>
                 </tr>
                 </thead>
