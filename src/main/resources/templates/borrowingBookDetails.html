@@ -44,7 +44,10 @@
             </span>
             </td>
             <td>
-                <a class="btn btn-light" th:href="@{/borrowingBookDetailsShowBooksReturn}">Return</a>
+                <a class="btn btn-light" th:href="@{/borrowingBookDetailsShowBooksReturn(title=${#request.getParameter('title')},
+                           authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},
+                           genre=${#request.getParameter('genre')})}"
+                   th:unless="${#request.getParameter('authorNS'==null)}">Return</a>
             </td>
         </tr>
     </table>
