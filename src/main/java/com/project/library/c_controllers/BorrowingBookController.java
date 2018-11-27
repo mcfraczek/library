@@ -101,7 +101,8 @@ public class BorrowingBookController {
         Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
-        model.addAttribute("bookList", bookList);
+        model.addAttribute("bookList", bookList);/*dzięki temu po wyszukiwaniu i oddaniu książki,
+        nie traci się danych wyszukiwania*/
         return "borrowingBookDetails";
     }
 
