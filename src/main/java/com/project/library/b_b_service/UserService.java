@@ -70,4 +70,18 @@ public class UserService {
     public Optional<User> findById(int userId) {
         return userDAO.findById(userId);
     }
+
+    @Transactional
+    public void returnBook(int returnedId, int userId) {
+        Optional<User> optionalUser = userDAO.findById(userId);
+        Optional<Book> optionalBook = bookService.findBookById(returnedId);
+        if (optionalUser.isPresent() && optionalBook.isPresent()) {
+            User user1 = optionalUser.get();
+            Book book = optionalBook.get();
+            user1.getBookList().remove(book);
+            book.setUser(null);
+            userDAO.save(user1);
+            bookService.saveBook(book);
+        }
+    }
 }
