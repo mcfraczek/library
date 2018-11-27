@@ -1,8 +1,9 @@
+var sumOfFine = 0;
+
 $("#back").on("click", function () {
     window.history.back();
 });
 dateToRed();
-var sumOfFine = 0;
 
 function dateToRed() {
     var array = document.getElementsByClassName("date");
@@ -16,7 +17,7 @@ function dateToRed() {
         /*5zł za dzień*/
         var fine = numberOfDays * 5;
         sumOfFine += fine;
-        if (numberOfDays === 0) {
+        if (numberOfDays > 30) {
             array[i].parentElement.classList.add("red");
         }
     }
