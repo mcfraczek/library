@@ -104,6 +104,9 @@ public class BorrowingBookController {
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         model.addAttribute("bookList", bookList);/*dzięki temu po wyszukiwaniu i oddaniu książki,
         nie traci się danych wyszukiwania*/
+
+        userService.returnBook(returnedId, userId);
+
         return "borrowingBookDetails";
     }
 
