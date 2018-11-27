@@ -28,7 +28,6 @@
         </tr>
         </thead>
         <tbody>
-        <!--th:with="valueNames=${T(com.mypackage.CollectorsMap).name(values.stream())}"-->
         <tr th:each="b : ${books.bookList}">
             <th scope="row" th:text="${books.bookList.indexOf(b)+1}">1</th>
             <td th:text="${b.title}">W pustyni i w puszczy</td>
@@ -40,7 +39,7 @@
             <td class="d-flex justify-content-around">
                 <span th:text="${b.date}" id="date">13-03-2019</span>
                 <span th:if="${T(com.project.library.ab_helperBackingBeans.methods.DateChecking).thereIsAFine(b.date)}">
-                <button class="btn btn-outline-light btn-sm">Add Fine</button>
+                <button class="btn btn-outline-light btn-sm">Add Fine To Session</button>
             </span>
             </td>
         </tr>
