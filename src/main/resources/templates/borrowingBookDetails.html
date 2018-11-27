@@ -44,7 +44,7 @@
             </span>
             </td>
             <td>
-                <button class="btn btn-light">Return</button>
+                <a class="btn btn-light" th:href="@{/borrowingBookDetailsShowBooksReturn}">Return</a>
             </td>
         </tr>
     </table>
@@ -130,7 +130,6 @@
                     <td th:text="${bl.title}">W Pustyni i W Puszczy</td>
                     <td th:text="${bl.libraryNumber}">7927847843943934</td>
                     <td class="w-25 mr-0 text-right">
-                        <!--<a class="btn btn-light mr-3">Borrow/Return</a>-->
                     </td>
                 </tr>
                 </tbody>
