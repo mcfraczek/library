@@ -24,8 +24,8 @@
             <th scope="col">Title</th>
             <th scope="col">Authors</th>
             <th scope="col">Library Number</th>
-            <th scope="col" class="d-flex justify-content-around">Borrowed
-                <button class="btn btn-outline-danger btn-sm" id="countfine"
+            <th scope="col" class="">Borrowed
+                <button class="btn btn-outline-danger btn-sm ml-2" id="countfine"
                         th:if="${T(com.project.library.ab_helperBackingBeans.methods.DateChecking).thereIsAFine(books.bookList)}">
                     Count Fine
                 </button>
@@ -42,7 +42,7 @@
                 </span>
             </td>
             <td th:text="${b.libraryNumber}">79979898779787878</td>
-            <td class="d-flex justify-content-around">
+            <td class="">
                 <span th:text="${b.date}" class="date">13-03-2019</span>
             </td>
             <td>
@@ -128,9 +128,17 @@
                            authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},
                            genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
                            th:unless="${#request.getParameter('title'==null)}">Borrow</a>
-                        <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
-                                th:text="${'Borrowed '+bl.date}">
+                        <span th:if="${bl.user.id==#session.getAttribute('id')}">
+                          <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
+                                  th:text="${'Borrowed by this user '+bl.date}">
                         </button>
+                      </span>
+                        <span th:if="${bl.user.id!=#session.getAttribute('id')}">
+                            <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
+                                    th:text="${'Borrowed '+bl.date}">
+                        </button>
+                        </span>
+
                     </td>
                 </tr>
                 </thead>
