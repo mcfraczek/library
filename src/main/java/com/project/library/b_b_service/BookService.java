@@ -50,15 +50,32 @@ public class BookService {
                     .filter(b -> ifIwantThisBook(authorList, b)).distinct()
                     .collect(Collectors.toList());
         } else if (title.isEmpty() && authorNS.isEmpty()) {
-            bookList = bookDAO.findBooksByTypeListContains(genre);
+            /*find by type*/
+            Optional<Type> typeOptional = typeService.findTypeByType(genre);
+            if (typeOptional.isPresent()) {
+                bookList = bookDAO.findBooksByTypeListContaining(typeOptional.get());
+            }
         } else if (genre.isEmpty()) {
             bookList = bookDAO.findBooksByTitleAndAuthorList(title, authorService.findByAuthor(authorNS));
             /*mamy tytuł i autora  gatunku, nie mamy gatunku*/
-        } else if (true) {
+        } else if (authorNS.isEmpty()) {
+            Optional<Type> typeOptional = typeService.findTypeByType(genre);
+            if (typeOptional.isPresent()) {
+                bookList = bookDAO.findBooksByTitleAndTypeListContaining(title, typeOptional.get());
+            }
             /*mamy tytuł i gatunek, nie mamy autora */
-        } else if (true) {
-            /*mamy autora i gatunek, nie mamy tytułu*/
-        } else if (true) {
+        } else if (title.isEmpty()) {
+            List<Author> authorList = authorService.findByAuthor(authorNS);
+            Optional<Type> typeOptional = typeService.findTypeByType(genre);
+            if (typeOptional.isPresent()) {
+                bookDAO.findBooksByAuthorListAndTypeListContaining(authorList, typeOptional.get());
+            }
+        } else {
+            List<Author> authorList = authorService.findByAuthor(authorNS);
+            Optional<Type> typeOptional = typeService.findTypeByType(genre);
+            if (typeOptional.isPresent()) {
+                bookList = bookDAO.findBooksByTitleAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
+            }
             /*mamy tytuł autora i gatunek*/
         }
         return bookList;
@@ -110,5 +127,9 @@ public class BookService {
 
         book.setTypeList(typeList);
         bookDAO.save(book);
+    }
+
+    public Optional<Book> findBookById(int borrowedId) {
+        return bookDAO.findById(borrowedId);
     }
 }

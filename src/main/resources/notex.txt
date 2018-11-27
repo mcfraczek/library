@@ -1,3 +1,4 @@
-Problem dublowania we wszystkich typach many to many
 Problem dobrego przesiewu w wyszukiwaniu
 problem zrobiania normalnej wizualziacji
+problem z dodawaniem w j.querry
+Kreskę naprawisz jeśli dasz wszędzie wymiar duży
