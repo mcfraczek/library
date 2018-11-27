@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
@@ -38,10 +37,8 @@ public class BorrowingBookController {
     }
 
     @RequestMapping("/borrowingBookDetails")
-    public String borrowingBookDetails(@RequestParam("userId") int userId, Model model,
-                                       HttpServletRequest request) {
+    public String borrowingBookDetails(HttpSession session, Model model, @RequestParam("userId") int userId) {
         /*Biorę id urzytkownika, biorę książkim które wyporzyczył i zapisuję id so sesji na przyszłość*/
-        HttpSession session = request.getSession();
         session.setAttribute("id", userId);
         Optional<User> user = userService.findById(userId);
         BooksPlusList booksPlusList = new BooksPlusList();
@@ -52,28 +49,28 @@ public class BorrowingBookController {
     }
 
     @RequestMapping("/borrowingBookDetailsShowBooks")
-    public ModelAndView borrowingBookDetailsShowBooks(
-            @RequestParam("title") String title, @RequestParam("authorNS") String authorNS,
-            @RequestParam("libraryNumber") String libraryNumber, @RequestParam("genre") String genre,
-            HttpSession session, Model model) {
+    public ModelAndView borrowingBookDetailsShowBooks(HttpSession session, Model model,
+                                                      @RequestParam("title") String title,
+                                                      @RequestParam("authorNS") String authorNS,
+                                                      @RequestParam("libraryNumber") String libraryNumber,
+                                                      @RequestParam("genre") String genre) {
         /*Nadal potrzebuję listy książek, więc biorę ją już z sesji*/
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
 
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
-        /*zapisz parametry do sesji dla przyszłej strony*/
 
         return new ModelAndView("borrowingBookDetails", "bookList", bookList);
     }
 
     @RequestMapping("/borrowingBookDetailsShowBooksBorrow")
-    public String borrowingBookDetailsShowBooksBorrow(@RequestParam("borrowedId") int borrowedId,
+    public String borrowingBookDetailsShowBooksBorrow(HttpSession session, Model model,
+                                                      @RequestParam("borrowedId") int borrowedId,
                                                       @RequestParam("title") String title,
                                                       @RequestParam("authorNS") String authorNS,
                                                       @RequestParam("libraryNumber") String libraryNumber,
-                                                      @RequestParam("genre") String genre,
-                                                      HttpSession session, Model model) {
+                                                      @RequestParam("genre") String genre) {
 
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userService.findById(userId);
@@ -81,10 +78,6 @@ public class BorrowingBookController {
         if (!heHas) {
             userService.setBook(borrowedId, user);
         }
-        /*get user*/
-        /*check if he has that book*/
-        /*Set this book to this user*/
-        /*ze statych*/
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         model.addAttribute("booklist", bookList);
