@@ -73,11 +73,7 @@ public class BorrowingBookController {
                                                       @RequestParam("genre") String genre) {
 
         int userId = (int) session.getAttribute("id");
-        Optional<User> user = userService.findById(userId);
-        boolean heHas = userService.checkIfHeHasThatBook(user, borrowedId);
-        if (!heHas) {
-            userService.setBook(borrowedId, user);
-        }
+        Optional<User> user = userService.getUserFromIdAndBorrowBook(borrowedId, userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         model.addAttribute("booklist", bookList);

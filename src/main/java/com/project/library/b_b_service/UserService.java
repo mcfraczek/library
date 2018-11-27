@@ -85,4 +85,13 @@ public class UserService {
             bookService.saveBook(book);
         }
     }
+
+    public Optional<User> getUserFromIdAndBorrowBook(int borrowedId, int userId) {
+        Optional<User> user = findById(userId);
+        boolean heHas = checkIfHeHasThatBook(user, borrowedId);
+        if (!heHas) {
+            setBook(borrowedId, user);
+        }
+        return user;
+    }
 }
