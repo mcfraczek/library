@@ -91,4 +91,12 @@ public class BorrowingBookController {
         return "borrowingBookDetails";
     }
 
+    @RequestMapping("/borrowingBookDetailsShowBooksReturn")
+    public String borrowingBookDetailsShowBooksReturn(Model model, HttpSession session) {
+        int userId = (int) session.getAttribute("id");
+        Optional<User> user = userService.findById(userId);
+        user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
+        return "borrowingBookDetails";
+    }
+
 }
