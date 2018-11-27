@@ -91,12 +91,13 @@ public class BorrowingBookController {
         return "borrowingBookDetails";
     }
 
-    @RequestMapping("/borrowingBookDetailsShowBooksReturn")
-    public String borrowingBookDetailsShowBooksReturn(Model model, HttpSession session,
-                                                      @RequestParam("title") String title,
-                                                      @RequestParam("authorNS") String authorNS,
-                                                      @RequestParam("libraryNumber") String libraryNumber,
-                                                      @RequestParam("genre") String genre) {
+    @RequestMapping("/borrowingBookDetailsReturn")
+    public String borrowingBookDetailsReturn(Model model, HttpSession session,
+                                             @RequestParam("title") String title,
+                                             @RequestParam("authorNS") String authorNS,
+                                             @RequestParam("libraryNumber") String libraryNumber,
+                                             @RequestParam("genre") String genre,
+                                             @RequestParam("returnedId") int returnedId) {
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
