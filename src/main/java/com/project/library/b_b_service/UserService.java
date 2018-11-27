@@ -80,6 +80,7 @@ public class UserService {
             Book book = optionalBook.get();
             user1.getBookList().remove(book);
             book.setUser(null);
+            book.setDate(null);
             userDAO.save(user1);
             bookService.saveBook(book);
         }
