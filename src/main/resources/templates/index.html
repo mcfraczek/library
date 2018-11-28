@@ -6,10 +6,34 @@
     <title>Home</title>
 </head>
 <body>
-<h1 class="display-4" th:text="${'Home'}"></h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<a href="#" th:href="@{/addUser}">addUser</a>
-<a href="#" th:href="@{/addBook}">addBook</a>
-<a href="#" th:href="@{/borrowingBookForm}">user borrows book</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/addUser}" href="#">Add User</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/addBook}" href="#">Add Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/borrowingBookForm}" href="#">Borrow/Return Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link disabled" href="#">Back</a>
+            </div>
+        </div>
+    </div>
+</nav>
 </body>
 </html>
