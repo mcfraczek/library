@@ -11,3 +11,7 @@ body {
 .bg-dark {
     background-color: rgba(63, 65, 66, 0.5) !important;
 }
+
+.bg-dark:hover {
+    background-color: rgba(63, 65, 66, 0.6) !important;
+}
