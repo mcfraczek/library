@@ -6,3 +6,7 @@ body {
 form {
     opacity: 1;
 }
+
+.bg-dark {
+    background-color: rgba(63, 65, 66, 0.4) !important;
+}
