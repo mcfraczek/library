@@ -1,4 +1,5 @@
 problem zrobiania normalnej wizualziacji
 problem z dodawaniem w j.querry
 Kreskę naprawisz jeśli dasz wszędzie wymiar duży
-exeption thymeleafa
+regex dla jęxyka polskiego
+Inaczej działający back

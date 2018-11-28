@@ -43,12 +43,13 @@ $('input[type="submit"]').on("click", function () {
     alert(html);
 });*/
 /*$("#submit").on("click", function () {
+    alert($("input"));
+
     var html;
     for (var i = 0; i < authorCount; i++) {
         html = $("#authors .form-row:eq(" + i + ")").html();
         $("#authors .form-row:eq(" + i + ")").html(change2(html, i + 1));
     }
-    alert(html);
 });
 function change2(input, number) {
     var reg = /\[(\d+)\]/g;
