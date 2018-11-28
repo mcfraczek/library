@@ -8,11 +8,17 @@ body {
     color: white;
 }
 
-#opacity {
+.opacity {
+    transition: 500ms;
+    opacity: 0.85;
+}
+
+.opacity:hover {
     opacity: 1;
 }
 
 .bg-dark {
+    transition: 500ms;
     background-color: rgba(63, 65, 66, 0.4) !important;
 }
 
