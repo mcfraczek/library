@@ -129,17 +129,16 @@
                            genre=${#request.getParameter('genre')},borrowedId=${bl.id})}"
                            th:unless="${#request.getParameter('title'==null)}">Borrow</a>
 
-                        <span th:if="${#session.getAttribute('id')==bl.user.id}">
-                          <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
-                                  th:text="${'Borrowed by this user '+bl.date}">
-                        </button>
-                      </span>
-                        <span th:if="${#session.getAttribute('id')!=bl.user.id}">
-                            <button class="btn btn-light mr-3 disabled" th:if="${bl.date!=null}"
+                        <span th:if="${bl.date!=null}">
+                            <button class="btn btn-light mr-3 disabled"
+                                    th:if="${#session.getAttribute('id')==bl.user.id}"
+                                    th:text="${'Borrowed by this user '+bl.date}">
+                            </button>
+                            <button class="btn btn-light mr-3 disabled"
+                                    th:if="${#session.getAttribute('id')!=bl.user.id}"
                                     th:text="${'Borrowed '+bl.date}">
-                        </button>
+                            </button>
                         </span>
-
                     </td>
                 </tr>
                 </thead>
