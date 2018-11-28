@@ -3,3 +3,4 @@ problem z dodawaniem w j.querry
 Kreskę naprawisz jeśli dasz wszędzie wymiar duży
 regex dla jęxyka polskiego
 Inaczej działający back
+zmień czcionkę

@@ -7,3 +7,7 @@ body {
     background-color: #cf2727;
     color: white;
 }
+
+#opacity {
+    opacity: 0.85;
+}
