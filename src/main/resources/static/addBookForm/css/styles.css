@@ -1,8 +1,13 @@
 body {
+
     background-image: url("alfons-morales-410757-unsplash2.jpg");
     background-size: cover;
 }
 
 form {
-    opacity: 0.9;
+    opacity: 1;
+}
+
+#opacitynav {
+    background-color: rgba(84, 37, 8, 0.1);
 }
