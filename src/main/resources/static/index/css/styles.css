@@ -1,9 +1,11 @@
 body {
     background-image: url("alfons-morales-410757-unsplash1.jpg");
     background-size: cover;
+    transition: all 3000ms ease;
 }
 
 #jumbo {
+    transition: all 500ms;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
 }
@@ -13,6 +15,7 @@ body {
 }
 
 .bg-dark {
+    transition: 500ms;
     background-color: rgba(63, 65, 66, 0.5) !important;
 }
 
