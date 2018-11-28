@@ -17,7 +17,7 @@ function dateToRed() {
         /*5zł za dzień*/
         var fine = numberOfDays * 5;
         sumOfFine += fine;
-        if (numberOfDays > 30) {
+        if (numberOfDays > 1) {
             array[i].parentElement.classList.add("red");
         }
     }
