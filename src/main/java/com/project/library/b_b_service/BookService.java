@@ -116,14 +116,16 @@ public class BookService {
             return author;
         }).collect(Collectors.toList());
         book.setAuthorList(authorList);
-
-        List<Type> typeList = book.getTypeList().stream().map(type -> {
-            Optional<Type> typeOptional = typeService.findTypeByType(type.getType());
-            if (typeOptional.isPresent()) {
-                return typeOptional.get();
-            }
-            return type;
-        }).collect(Collectors.toList());
+        List<Type> typeList = null;
+        if (book.getTypeList() != null) {
+            typeList = book.getTypeList().stream().map(type -> {
+                Optional<Type> typeOptional = typeService.findTypeByType(type.getType());
+                if (typeOptional.isPresent()) {
+                    return typeOptional.get();
+                }
+                return type;
+            }).collect(Collectors.toList());
+        }
 
         book.setTypeList(typeList);
         bookDAO.save(book);
