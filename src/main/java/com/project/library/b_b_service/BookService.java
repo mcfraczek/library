@@ -104,7 +104,6 @@ public class BookService {
         List<Book> finalList = bookList.stream()
                 .filter(b -> b.getAuthorList().equals(authorList))
                 .collect(Collectors.toList());
-        System.out.println(finalList);
         return finalList;
     }
 
