@@ -92,16 +92,22 @@
             </div>
         </div>
         <div class="row">
-            <div id="types" class="col-md-10 pr-1"></div>
+            <div class="col-md-5">
+                <button id="added" type="button" class="btn btn-light" th:if="${book.book.title!=null}"
+                        th:text="${book.book.title} + ' added'"></button>
+            </div>
+            <div id="types" class="col-md-5">
+            </div>
             <div class="col-md-2 d-flex justify-content-center align-items-start">
                 <input type="submit" id="submit" class="btn btn-light mr-3" value="Submit">
             </div>
         </div>
-
     </form>
+
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

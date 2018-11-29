@@ -33,6 +33,13 @@ $("#authors").on("click", ".deleteAuthor", function () {
     authorCount--;
     $(this).parent().parent().remove();
 });
+
+/*erase button*/
+$("#added").on("click", function () {
+    $(this).fadeOut(500, function () {
+        $(this).remove();
+    });
+});
 /*
 $('input[type="submit"]').on("click", function () {
     var html;
@@ -55,3 +62,4 @@ function change2(input, number) {
     var reg = /\[(\d+)\]/g;
     return input.replace(reg, '[' + number + ']');
 }*/
+
