@@ -24,6 +24,6 @@ public class AddingUserController {
     @PostMapping("/processAddUserForm")
     private String processForm(@ModelAttribute("user") UserPlusList user) {
         userService.saveUser(user.getUser());
-        return "userSaved";
+        return "addUserForm";
     }
 }
