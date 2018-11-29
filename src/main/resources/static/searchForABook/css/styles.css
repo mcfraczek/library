@@ -1,0 +1,22 @@
+body {
+    background-image: url("alfons-morales-410757-unsplash2.jpg");
+    background-size: cover;
+}
+
+.opacity {
+    transition: 500ms;
+    opacity: 0.85;
+}
+
+.opacity:hover {
+    opacity: 1;
+}
+
+.bg-dark {
+    transition: 500ms;
+    background-color: rgba(63, 65, 66, 0.4) !important;
+}
+
+.bg-dark:hover {
+    background-color: rgba(63, 65, 66, 0.5) !important;
+}
