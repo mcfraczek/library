@@ -36,6 +36,15 @@ public class BorrowingBookController {
         return "borrowingBookForm";
     }
 
+    @RequestMapping("/borrowingBookDetailsDeleteUser")
+    public String borrowingBookDetailsDeleteUser(
+            @RequestParam("name") String name,
+            @RequestParam("surname") String surname,
+            @RequestParam("userId") int userId) {
+        userService.deleteUser(userId);
+        return "borrowingBookForm";
+    }
+
     @RequestMapping("/borrowingBookDetails")
     public String borrowingBookDetails(HttpSession session, Model model, @RequestParam("userId") int userId) {
         /*Biorę id urzytkownika, biorę książkim które wyporzyczył i zapisuję id so sesji na przyszłość*/
