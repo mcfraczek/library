@@ -5,4 +5,3 @@ Inaczej działający back
 Przy genres nie pokazuje się no records found
 Adding romoving books
 wprowadź funkcje wycinania spacji
-Problem z oddawaniem listy, gdy nie znajduje po type list. Nie zwraca pustej, ale nulla
