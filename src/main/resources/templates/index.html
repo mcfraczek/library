@@ -33,9 +33,12 @@
             <div class="nav-item">
                 <a class="nav-link text-light" th:href="@{/searchForABook}" href="#">Search For A Book</a>
             </div>
-            <div class="nav-item">
-                <a class="nav-link disabled" href="#">Back</a>
-            </div>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" name="searched" placeholder="Quick Search"
+                       aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" th:href="@{/quickSearch}" type="submit">Search
+                </button>
+            </form>
         </div>
     </div>
 </nav>
