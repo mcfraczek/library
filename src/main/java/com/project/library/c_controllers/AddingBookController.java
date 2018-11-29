@@ -21,6 +21,6 @@ public class AddingBookController {
     @RequestMapping("/processAddBookForm")
     public String processForm(@ModelAttribute("book") BookPlusList bookPlusList) {
         bookService.saveBook(bookPlusList.getBook());
-        return "bookSaved";
+        return "addBookForm";
     }
 }
