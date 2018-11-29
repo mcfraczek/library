@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,9 +39,11 @@ public class BookService {
         if (!libraryNumber.isEmpty()) {
             bookList = bookDAO.findBooksByLibraryNumber(libraryNumber);
         } else if (authorNS.isEmpty() && genre.equals("Choose...")) {
+            bookList = new ArrayList<>();
             /*mamy tytuł*/
             bookList = bookDAO.findBooksByTitle(title);
         } else if (title.isEmpty() && genre.equals("Choose...")) {
+            bookList = new ArrayList<>();
             /*mamy autorów*/
             List<Author> authorList = authorService.findByAuthor(authorNS);
             bookList = authorList
@@ -51,26 +54,32 @@ public class BookService {
                     .collect(Collectors.toList());
         } else if (title.isEmpty() && authorNS.isEmpty()) {
             /*find by type*/
+            bookList = new ArrayList<>();
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
                 bookList = bookDAO.findBooksByTypeListContaining(typeOptional.get());
+                System.out.println(bookList);
             }
         } else if (genre.isEmpty()) {
+            bookList = new ArrayList<>();
             bookList = bookDAO.findBooksByTitleAndAuthorList(title, authorService.findByAuthor(authorNS));
             /*mamy tytuł i autora  gatunku, nie mamy gatunku*/
         } else if (authorNS.isEmpty()) {
+            bookList = new ArrayList<>();
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
                 bookList = bookDAO.findBooksByTitleAndTypeListContaining(title, typeOptional.get());
             }
             /*mamy tytuł i gatunek, nie mamy autora */
         } else if (title.isEmpty()) {
+            bookList = new ArrayList<>();
             List<Author> authorList = authorService.findByAuthor(authorNS);
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
                 bookDAO.findBooksByAuthorListAndTypeListContaining(authorList, typeOptional.get());
             }
         } else {
+            bookList = new ArrayList<>();
             List<Author> authorList = authorService.findByAuthor(authorNS);
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
