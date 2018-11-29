@@ -2,6 +2,5 @@ problem z dodawaniem w j.querry
 Kreskę naprawisz jeśli dasz wszędzie wymiar duży
 regex dla jęxyka polskiego
 Inaczej działający back
-Przy genres nie pokazuje się no records found
 Adding romoving books
 wprowadź funkcje wycinania spacji
