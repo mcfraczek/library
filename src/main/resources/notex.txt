@@ -1,9 +1,8 @@
-problem zrobiania normalnej wizualziacji
 problem z dodawaniem w j.querry
 Kreskę naprawisz jeśli dasz wszędzie wymiar duży
 regex dla jęxyka polskiego
 Inaczej działający back
-zmień czcionkę
 Przy genres nie pokazuje się no records found
 Adding romoving books
 Niektóre wywalają się na pustych formularzach
+wprowadź funkcje wycinania spacji

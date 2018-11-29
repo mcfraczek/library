@@ -94,4 +94,13 @@ public class UserService {
         }
         return user;
     }
+
+    public void deleteUser(int userId) {
+        Optional<User> userOptional = userDAO.findById(userId);
+        if (userOptional.isPresent()) {
+            User user1 = userOptional.get();
+            user1.setBookList(null);
+            userDAO.delete(user1);
+        }
+    }
 }
