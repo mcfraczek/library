@@ -122,7 +122,17 @@
                         <th scope="row"></th>
                         <td th:text="${bl.title}">W Pustyni i W Puszczy</td>
                         <td th:text="${bl.libraryNumber}">7927847843943934</td>
-                        <td class="w-25 mr-0 text-right"></td>
+                        <!--title=moja&authorNS=&authorNS=&genre=Choose...-->
+                        <td class="w-25 mr-0 text-right">
+                            <a th:href="@{/searchForABookShowBooksDeleteBook(title=${#request.getParameter('title')},
+                authorNS=${#request.getParameter('authorNS')}, libraryNumber=${#request.getParameter('libraryNumber')},
+                genre=${#request.getAttribute('genre')},
+                bookId=${bl.id})}"
+                               class="btn btn-danger"
+                               onclick="return confirm('Are you sure you want to delete this book?');">
+                                Delete Book
+                            </a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

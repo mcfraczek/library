@@ -88,9 +88,6 @@ public class BookService {
                 bookList = bookDAO.findBooksByTitleIgnoreCaseAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
             }
         }
-        if (bookList == null) {
-            /*może inne parametry*/
-        }
         return bookList;
     }
 
@@ -156,5 +153,13 @@ public class BookService {
 
     public Optional<Book> findBookById(int borrowedId) {
         return bookDAO.findById(borrowedId);
+    }
+
+    public void deleteBook(int bookId) {
+        Optional<Book> bookOptional = bookDAO.findById(bookId);
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            bookDAO.delete(book);/*błąd!Kasuje wszystko  sprawdź*/
+        }
     }
 }
