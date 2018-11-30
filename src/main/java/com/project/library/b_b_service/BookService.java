@@ -46,12 +46,13 @@ public class BookService {
             bookList = new ArrayList<>();
             /*mamy autorów*/
             List<Author> authorList = authorService.findByAuthor(authorNS);
-            bookList = authorList
-                    .stream()
-                    .flatMap(author -> author.getBookList()
-                            .stream())
-                    .filter(b -> ifIwantThisBook(authorList, b)).distinct()
-                    .collect(Collectors.toList());
+            bookList = getBooksFromAuthorList(authorList);
+            if (bookList.isEmpty()) {
+                List<Author> authorList1 = authorService.findByAuthorsName(authorNS);
+                bookList = getBooksFromAuthorList(authorList1);
+                /*szukaj czy to są tylko nazwiska*/
+                /*jeśli nadal jest pusta - zobacz, czy to nie tylko imiona*/
+            }
         } else if (title.isEmpty() && authorNS.isEmpty()) {
             /*find by type*/
             bookList = new ArrayList<>();
@@ -87,6 +88,17 @@ public class BookService {
             }
             /*mamy tytuł autora i gatunek*/
         }
+        return bookList;
+    }
+
+    private List<Book> getBooksFromAuthorList(List<Author> authorList) {
+        List<Book> bookList;
+        bookList = authorList
+                .stream()
+                .flatMap(author -> author.getBookList()
+                        .stream())
+                .filter(b -> ifIwantThisBook(authorList, b)).distinct()
+                .collect(Collectors.toList());
         return bookList;
     }
 
