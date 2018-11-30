@@ -29,6 +29,10 @@ public class SearchingForBookController {
                                        @RequestParam("authorNS") String authorNS,
                                        @RequestParam("libraryNumber") String libraryNumber,
                                        @RequestParam("genre") String genre) {
+        if (title.isEmpty() && authorNS.isEmpty() && libraryNumber.isEmpty() && genre.equals("Choose...")) {
+            BookPlusList bookPlusList = new BookPlusList();
+            return new ModelAndView("searchForABook", "books", bookPlusList);
+        }
         BookPlusList bookPlusList = new BookPlusList();
         model.addAttribute("books", bookPlusList);
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
