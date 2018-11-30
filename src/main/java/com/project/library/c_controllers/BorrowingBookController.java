@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -61,19 +60,26 @@ public class BorrowingBookController {
     }
 
     @RequestMapping("/borrowingBookDetailsShowBooks")
-    public ModelAndView borrowingBookDetailsShowBooks(HttpSession session, Model model,
-                                                      @RequestParam("title") String title,
-                                                      @RequestParam("authorNS") String authorNS,
-                                                      @RequestParam("libraryNumber") String libraryNumber,
-                                                      @RequestParam("genre") String genre) {
+    public String borrowingBookDetailsShowBooks(HttpSession session, Model model,
+                                                @RequestParam("title") String title,
+                                                @RequestParam("authorNS") String authorNS,
+                                                @RequestParam("libraryNumber") String libraryNumber,
+                                                @RequestParam("genre") String genre) {
         /*Nadal potrzebuję listy książek, więc biorę ją już z sesji*/
+        if (title.isEmpty() && authorNS.isEmpty() && libraryNumber.isEmpty() && genre.equals("Choose...")) {
+            int userId = (int) session.getAttribute("id");
+            Optional<User> user = userService.findById(userId);
+            user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
+            model.addAttribute("bookList", null);
+            return "borrowingBookDetails";
+        }
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
 
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
-
-        return new ModelAndView("borrowingBookDetails", "bookList", bookList);
+        model.addAttribute("bookList", bookList);
+        return "borrowingBookDetails";
     }
 
     @RequestMapping("/borrowingBookDetailsShowBooksBorrow")
