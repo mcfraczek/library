@@ -34,7 +34,7 @@ public class AuthorService {
     }
 
     Optional<Author> findAuthorByNameAndSurname(String name, String surname) {
-        return authorDAO.findAuthorByNameAndSurname(name, surname);
+        return authorDAO.findAuthorByNameAndSurnameIgnoreCase(name, surname);
     }
 
     public List<Author> findByAuthor(String authorsNS) {
@@ -79,7 +79,7 @@ public class AuthorService {
         List<Author> authorList = new ArrayList<>();
 
         for (String name : stringOfNames) {
-            authorList.addAll(authorDAO.findAuthorsByName(name));
+            authorList.addAll(authorDAO.findAuthorsByNameIgnoreCase(name));
         }
         return authorList;
     }
@@ -89,7 +89,7 @@ public class AuthorService {
         List<Author> authorList = new ArrayList<>();
 
         for (String surname : strimgOfSurnames) {
-            authorList.addAll(authorDAO.findAuthorsBySurname(surname));
+            authorList.addAll(authorDAO.findAuthorsBySurnameIgnoreCase(surname));
         }
         return authorList;
     }

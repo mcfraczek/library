@@ -13,6 +13,6 @@ public class TypeService {
     private TypeDEO typeDEO;
 
     public Optional<Type> findTypeByType(String type) {
-        return typeDEO.findTypeByType(type);
+        return typeDEO.findTypeByTypeIgnoreCase(type);
     }
 }

@@ -25,11 +25,11 @@ public class UserService {
     public List<User> getUsers(@RequestParam("name") String name, @RequestParam("surname") String surname) {
         List<User> userList;
         if (name.isEmpty()) {
-            userList = userDAO.findUserBySurnameOrderBySurname(surname);
+            userList = userDAO.findUserBySurnameIgnoreCaseOrderBySurname(surname);
         } else if (surname.isEmpty()) {
-            userList = userDAO.findUserByNameOrderBySurname(name);
+            userList = userDAO.findUserByNameIgnoreCaseOrderBySurname(name);
         } else {
-            userList = userDAO.findUserByNameAndSurnameOrderBySurname(name, surname);
+            userList = userDAO.findUserByNameAndSurnameIgnoreCaseOrderBySurname(name, surname);
         }
         return userList;
     }
@@ -59,7 +59,7 @@ public class UserService {
         String postalCode = user.getUserDetails().getAddress().getPostalCode();
         String city = user.getUserDetails().getAddress().getCity();
 
-        Optional<Address> addressOptional = addressDEO.findAddressByStreetAndStreetNumberAndApartmentNumberAndCountyAndPostalCodeAndCity(street, streetNr, apartmentNumber, county, postalCode, city);
+        Optional<Address> addressOptional = addressDEO.findAddressByStreetAndStreetNumberAndApartmentNumberAndCountyAndPostalCodeAndCityIgnoreCase(street, streetNr, apartmentNumber, county, postalCode, city);
 
         if (addressOptional.isPresent()) {
             user.getUserDetails().setAddress(addressOptional.get());
