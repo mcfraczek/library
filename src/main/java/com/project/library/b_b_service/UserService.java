@@ -25,11 +25,11 @@ public class UserService {
     public List<User> getUsers(@RequestParam("name") String name, @RequestParam("surname") String surname) {
         List<User> userList;
         if (name.isEmpty()) {
-            userList = userDAO.findUserBySurname(surname);
+            userList = userDAO.findUserBySurnameOrderBySurname(surname);
         } else if (surname.isEmpty()) {
-            userList = userDAO.findUserByName(name);
+            userList = userDAO.findUserByNameOrderBySurname(name);
         } else {
-            userList = userDAO.findUserByNameAndSurname(name, surname);
+            userList = userDAO.findUserByNameAndSurnameOrderBySurname(name, surname);
         }
         return userList;
     }
