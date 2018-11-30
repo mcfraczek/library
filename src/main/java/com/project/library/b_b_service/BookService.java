@@ -146,7 +146,6 @@ public class BookService {
                 return type;
             }).collect(Collectors.toList());
         }
-
         book.setTypeList(typeList);
         bookDAO.save(book);
     }
@@ -155,11 +154,20 @@ public class BookService {
         return bookDAO.findById(borrowedId);
     }
 
+    @Transactional
     public void deleteBook(int bookId) {
         Optional<Book> bookOptional = bookDAO.findById(bookId);
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
-            bookDAO.delete(book);/*błąd!Kasuje wszystko  sprawdź*/
+            List<Author> authorList = authorService.findAuthorListByBook(book);
+            for (Author author : authorList) {
+                author.getBookList().remove(book);
+            }
+            List<Type> typeList = typeService.findTypesByBook(book);
+            for (Type type : typeList) {
+                type.getBookList().remove(book);
+            }
+            bookDAO.delete(book);
         }
     }
 }

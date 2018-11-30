@@ -1,6 +1,7 @@
 package com.project.library.b_b_service;
 
 import com.project.library.a_entity.Author;
+import com.project.library.a_entity.Book;
 import com.project.library.b_a_DAO.AuthorDAO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -92,6 +93,10 @@ public class AuthorService {
             authorList.addAll(authorDAO.findAuthorsBySurnameIgnoreCase(surname));
         }
         return authorList;
+    }
+
+    public List<Author> findAuthorListByBook(Book book) {
+        return authorDAO.findAuthorsByBookListContaining(book);
     }
 }
 
