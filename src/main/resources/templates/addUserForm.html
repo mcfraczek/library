@@ -44,46 +44,47 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name" class="text-light">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{user.name}" required>
+                <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{user.name}" required
+                       maxlength="45">
             </div>
             <div class="form-group col-md-6">
                 <label for="surname" class="text-light">Surname</label>
                 <input type="text" class="form-control" id="surname" placeholder="Surname" th:field="*{user.surname}"
-                       required>
+                       required maxlength="45">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="PESEL" class="text-light">PESEL</label>
                 <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{user.PESEL}"
-                       required>
+                       required pattern="\d{13}">
             </div>
             <div class="form-group col-md-4">
                 <label for="telephone" class="text-light">Telephone number</label>
                 <input type="text" class="form-control" id="telephone" placeholder="602986739"
-                       th:field="*{user.userDetails.telNumber}" required>
+                       th:field="*{user.userDetails.telNumber}" required maxlength="20">
             </div>
             <div class="form-group col-md-4">
                 <label for="email" class="text-light">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="bob@gmail.com"
-                       th:field="*{user.userDetails.email}" required>
+                       th:field="*{user.userDetails.email}" required maxlength="40">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-8">
                 <label for="street" class="text-light">Street</label>
                 <input type="text" class="form-control" id="street" placeholder="St. John"
-                       th:field="*{user.userDetails.address.street}" required>
+                       th:field="*{user.userDetails.address.street}" required maxlength="40">
             </div>
             <div class="form-group col-md-2">
                 <label for="streetNumber" class="text-light">Street Number</label>
                 <input type="text" class="form-control" id="streetNumber" placeholder="2b"
-                       th:field="*{user.userDetails.address.streetNumber}" required>
+                       th:field="*{user.userDetails.address.streetNumber}" required maxlength="6">
             </div>
             <div class="form-group col-md-2">
                 <label for="apartmentNumber" class="text-light">Apartment Number</label>
                 <input type="text" class="form-control" id="apartmentNumber" placeholder="54"
-                       th:field="*{user.userDetails.address.apartmentNumber}">
+                       th:field="*{user.userDetails.address.apartmentNumber}" maxlength="6">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
@@ -96,12 +97,13 @@
                 <div class="form-group col-md-2">
                     <label for="inputZip" class="text-light">Zip</label>
                     <input type="text" class="form-control" id="inputZip"
-                           placeholder="03-765" th:field="*{user.userDetails.address.postalCode}" required>
+                           placeholder="03-765" th:field="*{user.userDetails.address.postalCode}" required
+                           pattern="\d{13}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="city" class="text-light">City</label>
                     <input type="text" class="form-control" id="city" placeholder="Warszawa"
-                           th:field="*{user.userDetails.address.city}" required>
+                           th:field="*{user.userDetails.address.city}" required maxlength="30">
                 </div>
                 <div class="col-md-4 d-flex align-items-center">
                     <button type="submit" class="btn btn-light mt-3">Save User</button>
