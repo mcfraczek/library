@@ -6,11 +6,8 @@ import com.project.library.ab_helperBackingBeans.book.BooksPlusList;
 import com.project.library.b_b_service.BookService;
 import com.project.library.b_b_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,12 +22,6 @@ public class BorrowingBookController {
     private UserService userService;
     @Autowired
     private BookService bookService;
-
-    @InitBinder
-    public void initBinder(WebDataBinder webDataBinder) {
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-        webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-    }
 
     @RequestMapping("/borrowingBookForm")
     public String borrowingBookForm() {
