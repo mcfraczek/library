@@ -10,4 +10,6 @@ public interface AuthorDAO extends CrudRepository<Author, Integer> {
     Optional<Author> findAuthorByNameAndSurname(String name, String surname);
 
     List<Author> findAuthorsByName(String name);
+
+    List<Author> findAuthorsBySurname(String surname);
 }

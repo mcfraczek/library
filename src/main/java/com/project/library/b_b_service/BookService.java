@@ -48,10 +48,12 @@ public class BookService {
             List<Author> authorList = authorService.findByAuthor(authorNS);
             bookList = getBooksFromAuthorList(authorList);
             if (bookList.isEmpty()) {
-                List<Author> authorList1 = authorService.findByAuthorsName(authorNS);
-                bookList = getBooksFromAuthorList(authorList1);
+                bookList = getBooksFromAuthorList(authorService.findByAuthorsName(authorNS));
                 /*szukaj czy to są tylko nazwiska*/
                 /*jeśli nadal jest pusta - zobacz, czy to nie tylko imiona*/
+            }
+            if (bookList.isEmpty()) {
+                bookList = getBooksFromAuthorList(authorService.findByAuthorsSurname(authorNS));
             }
         } else if (title.isEmpty() && authorNS.isEmpty()) {
             /*find by type*/
@@ -86,7 +88,9 @@ public class BookService {
             if (typeOptional.isPresent()) {
                 bookList = bookDAO.findBooksByTitleAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
             }
-            /*mamy tytuł autora i gatunek*/
+        }
+        if (bookList == null) {
+            /*może inne parametry*/
         }
         return bookList;
     }
