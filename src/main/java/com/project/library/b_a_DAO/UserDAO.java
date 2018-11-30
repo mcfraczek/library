@@ -6,10 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface UserDAO extends CrudRepository<User, Integer> {
-    List<User> findUserByNameAndSurname(String name, String surname);
+    List<User> findUserByNameAndSurnameOrderBySurname(String name, String surname);
 
-    List<User> findUserByName(String name);
+    List<User> findUserByNameOrderBySurname(String name);
 
-    List<User> findUserBySurname(String surname);
+    List<User> findUserBySurnameOrderBySurname(String surname);
 
 }
