@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -18,10 +17,14 @@ public class QuickSearchController {
     private QuickSearchService quickSearchService;
 
     @RequestMapping("/quickSearch")
-    public ModelAndView quickSearch(@RequestParam("searched") String searched, Model model) {
+    public String quickSearch(@RequestParam("searched") String searched, Model model) {
+        if (searched.isEmpty()) {
+            return "index";
+        }
         List<Book> bookList = quickSearchService.search(searched);
         model.addAttribute("bookList", bookList);
         BookPlusList bookPlusList = new BookPlusList();
-        return new ModelAndView("searchForABook", "books", bookPlusList);
+        model.addAttribute("books", bookPlusList);
+        return "searchForABook";
     }
 }

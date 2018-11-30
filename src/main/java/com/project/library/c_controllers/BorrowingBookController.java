@@ -31,6 +31,9 @@ public class BorrowingBookController {
     @RequestMapping("/borrowingBookFormShowUsers")
     public String borrowingBookFormShowUsers
             (@RequestParam("name") String name, @RequestParam("surname") String surname, Model model) {
+        if (surname.isEmpty() && name.isEmpty()) {
+            return "borrowingBookForm";
+        }
         List<User> userList = userService.getUsers(name, surname);
         model.addAttribute("userList", userList);
         return "borrowingBookForm";
