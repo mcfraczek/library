@@ -49,19 +49,19 @@
             <div class="form-group col-md-12">
                 <label for="title" class="text-light">Title</label>
                 <input class="form-control" type="text" id="title" placeholder="Winnie The Pooh"
-                       th:field="*{book.title}" required>
+                       th:field="*{book.title}" required maxlength="60">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-5 text-light mb-0">
                 <label for="authorName">Author's Name/Names</label>
                 <input type="text" class="form-control" name="book.authorList[0].name" id="authorName"
-                       placeholder="Alan Aleksander" required>
+                       placeholder="Alan Aleksander" required maxlength="45">
             </div>
             <div class="form-group col-md-5 text-light mb-0">
                 <label for="authorSurname">Author's Surname</label>
                 <input type="text" class="form-control" name="book.authorList[0].surname" id="authorSurname"
-                       placeholder="Milne" required>
+                       placeholder="Milne" required maxlength="45">
             </div>
             <div class="col-md-2 d-flex justify-content-center align-items-end">
                 <button type="button" class="btn btn-light btn-sm mb-1" id="addAuthor"><i class="fas fa-user-plus"></i>
@@ -72,13 +72,13 @@
         <div class="form-row mt-3">
             <div class="form-group col-md-3 text-light">
                 <label for="ISBN">ISBN</label>
-                <input class="form-control" type="text" id="ISBN" placeholder="978-2-1234-5680-3"
-                       th:field="*{book.ISBN}" required>
+                <input class="form-control" type="text" id="ISBN" placeholder="2789878934534"
+                       th:field="*{book.ISBN}" required pattern="\d{13}">
             </div>
             <div class="form-group col-md-3 text-light">
                 <label for="number">Library Number</label>
-                <input class="form-control" type="text" id="number" placeholder="978-2-1234-5680-3"
-                       th:field="*{book.libraryNumber}" required>
+                <input class="form-control" type="text" id="number" placeholder="8367495837267"
+                       th:field="*{book.libraryNumber}" required pattern="\d{13}">
             </div>
             <div class="form-group col-md-4">
                 <label for="genre" class="text-light">Genre</label>
