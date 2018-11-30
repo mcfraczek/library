@@ -23,13 +23,11 @@ public class DeleteBookController {
                                                     @RequestParam("genre") String genre,
                                                     @RequestParam("bookId") int bookId,
                                                     Model model) {
+        bookService.deleteBook(bookId);
         BookPlusList bookPlusList = new BookPlusList();
         model.addAttribute("books", bookPlusList);
-
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         model.addAttribute("bookList", bookList);
-
-        bookService.deleteBook(bookId);
         return "searchForABook";
     }
 }
