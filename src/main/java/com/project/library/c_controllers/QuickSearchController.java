@@ -1,11 +1,14 @@
 package com.project.library.c_controllers;
 
 import com.project.library.a_entity.Book;
+import com.project.library.ab_helperBackingBeans.book.BookPlusList;
 import com.project.library.b_b_service.QuickSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -15,9 +18,11 @@ public class QuickSearchController {
     private QuickSearchService quickSearchService;
 
     @RequestMapping("/quickSearch")
-    public String quickSearch(@RequestParam("searched") String searched) {
-
+    public ModelAndView quickSearch(@RequestParam("searched") String searched, Model model) {
         List<Book> bookList = quickSearchService.search(searched);
-        return "searchForABookShowBooks";
+        model.addAttribute("bookList", bookList);
+        /*tylko dla listy gatunków*/
+        BookPlusList bookPlusList = new BookPlusList();
+        return new ModelAndView("searchForABook", "books", bookPlusList);
     }
 }
