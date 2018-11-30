@@ -4,3 +4,5 @@ regex dla jęxyka polskiego
 Inaczej działający back
 Adding romoving books
 wprowadź funkcje wycinania spacji
+
+https://docs.spring.io/spring-data/jpa/docs/1.5.1.RELEASE/reference/html/jpa.repositories.html#jpa.query-methods.query-creation

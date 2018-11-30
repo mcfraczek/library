@@ -41,7 +41,7 @@ public class BookService {
         } else if (authorNS.isEmpty() && genre.equals("Choose...")) {
             bookList = new ArrayList<>();
             /*mamy tytuł*/
-            bookList = bookDAO.findBooksByTitle(title);
+            bookList = bookDAO.findBooksByTitleIgnoreCase(title);
         } else if (title.isEmpty() && genre.equals("Choose...")) {
             bookList = new ArrayList<>();
             /*mamy autorów*/
@@ -65,13 +65,13 @@ public class BookService {
             }
         } else if (genre.isEmpty()) {
             bookList = new ArrayList<>();
-            bookList = bookDAO.findBooksByTitleAndAuthorList(title, authorService.findByAuthor(authorNS));
+            bookList = bookDAO.findBooksByTitleIgnoreCaseAndAuthorList(title, authorService.findByAuthor(authorNS));
             /*mamy tytuł i autora  gatunku, nie mamy gatunku*/
         } else if (authorNS.isEmpty()) {
             bookList = new ArrayList<>();
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
-                bookList = bookDAO.findBooksByTitleAndTypeListContaining(title, typeOptional.get());
+                bookList = bookDAO.findBooksByTitleIgnoreCaseAndTypeListContaining(title, typeOptional.get());
             }
             /*mamy tytuł i gatunek, nie mamy autora */
         } else if (title.isEmpty()) {
@@ -86,7 +86,7 @@ public class BookService {
             List<Author> authorList = authorService.findByAuthor(authorNS);
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
-                bookList = bookDAO.findBooksByTitleAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
+                bookList = bookDAO.findBooksByTitleIgnoreCaseAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
             }
         }
         if (bookList == null) {

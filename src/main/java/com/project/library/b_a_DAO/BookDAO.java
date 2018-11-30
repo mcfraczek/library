@@ -10,15 +10,15 @@ import java.util.List;
 public interface BookDAO extends CrudRepository<Book, Integer> {
     List<Book> findBooksByLibraryNumber(String libraryNumber);
 
-    List<Book> findBooksByTitle(String title);
+    List<Book> findBooksByTitleIgnoreCase(String title);
 
     List<Book> findBooksByAuthorListAndTypeListContaining(List<Author> authorList, Type type);
 
     List<Book> findBooksByTypeListContaining(Type type);
 
-    List<Book> findBooksByTitleAndAuthorList(String string, List<Author> authorList);
+    List<Book> findBooksByTitleIgnoreCaseAndAuthorList(String string, List<Author> authorList);
 
-    List<Book> findBooksByTitleAndTypeListContaining(String title, Type type);
+    List<Book> findBooksByTitleIgnoreCaseAndTypeListContaining(String title, Type type);
 
-    List<Book> findBooksByTitleAndAuthorListAndTypeListContaining(String title, List<Author> authorList, Type type);
+    List<Book> findBooksByTitleIgnoreCaseAndAuthorListAndTypeListContaining(String title, List<Author> authorList, Type type);
 }
