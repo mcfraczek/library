@@ -10,9 +10,9 @@ var divClose = "</div>";
 
 $("#addAuthor").on("click", function () {
     var inputHtml = divRowOpenClass + divColOpen(5) + '<label for="author' + authorCount + 'Name" class="text-light">Author\'s ' + (authorCount + 1) + ' Name/Names</label>' +
-        '<input type="text" id="author' + authorCount + 'Name" placeholder="Alan Alexander" name="book.authorList[' + authorCount + '].name" class="form-control" />' +
+        '<input type="text" id="author' + authorCount + 'Name" placeholder="Alan Alexander" name="book.authorList[' + authorCount + '].name" class="form-control" required/>' +
         divClose + divColOpen(5) + '<label for="author' + authorCount + 'Surname" class="text-light">Author\'s ' + (authorCount + 1) + ' Surname</label>'
-        + '<input type="text" id="author' + authorCount + 'Surname" placeholder="Milne" name="book.authorList[' + authorCount + '].surname" class="form-control"/>'
+        + '<input type="text" id="author' + authorCount + 'Surname" placeholder="Milne" name="book.authorList[' + authorCount + '].surname" class="form-control" required/>'
         + divClose + button + divClose;
     authorCount++;
     $("#authors").append(inputHtml);

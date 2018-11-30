@@ -44,39 +44,41 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name" class="text-light">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{user.name}">
+                <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{user.name}" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="surname" class="text-light">Surname</label>
-                <input type="text" class="form-control" id="surname" placeholder="Surname" th:field="*{user.surname}">
+                <input type="text" class="form-control" id="surname" placeholder="Surname" th:field="*{user.surname}"
+                       required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="PESEL" class="text-light">PESEL</label>
-                <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{user.PESEL}">
+                <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{user.PESEL}"
+                       required>
             </div>
             <div class="form-group col-md-4">
                 <label for="telephone" class="text-light">Telephone number</label>
                 <input type="text" class="form-control" id="telephone" placeholder="602986739"
-                       th:field="*{user.userDetails.telNumber}">
+                       th:field="*{user.userDetails.telNumber}" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="email" class="text-light">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="bob@gmail.com"
-                       th:field="*{user.userDetails.email}">
+                       th:field="*{user.userDetails.email}" required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-8">
                 <label for="street" class="text-light">Street</label>
                 <input type="text" class="form-control" id="street" placeholder="St. John"
-                       th:field="*{user.userDetails.address.street}">
+                       th:field="*{user.userDetails.address.street}" required>
             </div>
             <div class="form-group col-md-2">
                 <label for="streetNumber" class="text-light">Street Number</label>
                 <input type="text" class="form-control" id="streetNumber" placeholder="2b"
-                       th:field="*{user.userDetails.address.streetNumber}">
+                       th:field="*{user.userDetails.address.streetNumber}" required>
             </div>
             <div class="form-group col-md-2">
                 <label for="apartmentNumber" class="text-light">Apartment Number</label>
@@ -86,7 +88,7 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="county" class="text-light">County</label>
-                    <select id="county" class="form-control" th:field="*{user.userDetails.address.county}">
+                    <select id="county" class="form-control" th:field="*{user.userDetails.address.county}" required>
                         <option selected="selected" value="choose" disabled="disabled">Choose</option>
                         <option th:each="c : ${user.listFromDirectFile()}" th:text="${c}" th:value="${c}"></option>
                     </select>
@@ -94,12 +96,12 @@
                 <div class="form-group col-md-2">
                     <label for="inputZip" class="text-light">Zip</label>
                     <input type="text" class="form-control" id="inputZip"
-                           placeholder="03-765" th:field="*{user.userDetails.address.postalCode}">
+                           placeholder="03-765" th:field="*{user.userDetails.address.postalCode}" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="city" class="text-light">City</label>
                     <input type="text" class="form-control" id="city" placeholder="Warszawa"
-                           th:field="*{user.userDetails.address.city}">
+                           th:field="*{user.userDetails.address.city}" required>
                 </div>
                 <div class="col-md-4 d-flex align-items-center">
                     <button type="submit" class="btn btn-light mt-3">Save User</button>
