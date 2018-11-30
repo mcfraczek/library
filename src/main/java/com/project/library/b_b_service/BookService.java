@@ -61,7 +61,6 @@ public class BookService {
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
                 bookList = bookDAO.findBooksByTypeListContaining(typeOptional.get());
-                System.out.println(bookList);
             }
         } else if (genre.isEmpty()) {
             bookList = new ArrayList<>();

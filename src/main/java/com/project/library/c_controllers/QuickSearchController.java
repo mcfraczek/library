@@ -21,7 +21,6 @@ public class QuickSearchController {
     public ModelAndView quickSearch(@RequestParam("searched") String searched, Model model) {
         List<Book> bookList = quickSearchService.search(searched);
         model.addAttribute("bookList", bookList);
-        /*tylko dla listy gatunków*/
         BookPlusList bookPlusList = new BookPlusList();
         return new ModelAndView("searchForABook", "books", bookPlusList);
     }
