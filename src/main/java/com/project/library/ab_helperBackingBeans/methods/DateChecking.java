@@ -26,14 +26,12 @@ public interface DateChecking {
         }
         return false;
     }
-}
-/*  static boolean thereIsAFine(List<Book> bookList) {
-        for (Book book : bookList) {
-            LocalDate timeBorrowed = LocalDate.from(DateTimeFormatter.ISO_LOCAL_DATE.parse(book.getDate()));
-            LocalDate nowMinus30 = LocalDate.now().minusDays(30);
-            if (nowMinus30.equals(timeBorrowed)) {
-                return true;
-            }
+
+    static String prolongBook(String date) {
+        if (!thereIsAFine(date)) {
+            LocalDate now = LocalDate.now();
+            return now.toString();
         }
-        return false;
-    }*/
+        return date;
+    }
+}
