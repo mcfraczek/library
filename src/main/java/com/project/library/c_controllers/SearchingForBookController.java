@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @AllArgsConstructor
@@ -25,12 +24,11 @@ public class SearchingForBookController {
     }
 
     @RequestMapping("/searchForABookShowBooks")
-    public ModelAndView searchForABook(HttpSession session, Model model,
+    public ModelAndView searchForABook(Model model,
                                        @RequestParam("title") String title,
                                        @RequestParam("authorNS") String authorNS,
                                        @RequestParam("libraryNumber") String libraryNumber,
                                        @RequestParam("genre") String genre) {
-        /*Nadal potrzebuję listy książek, więc biorę ją już z sesji*/
         BookPlusList bookPlusList = new BookPlusList();
         model.addAttribute("books", bookPlusList);
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
