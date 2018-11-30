@@ -54,6 +54,7 @@
                     Count Fine
                 </button>
             </th>
+            <th scope="col">Prolong</th>
             <th scope="col">Return</th>
         </tr>
         </thead>
@@ -69,6 +70,11 @@
             <td class="">
                 <span th:text="${b.date}" class="date">13-03-2019</span>
             </td>
+            <td><a class="btn btn-light"
+                   th:href="@{/borrowingBookDetailsProlong(title=${#request.getParameter('title')},
+                           authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},
+                           genre=${#request.getParameter('genre')},returnedId=${b.id})}"
+                   th:unless="${#request.getParameter('title'==null)}">Prolong</a></td>
             <td>
                 <a class="btn btn-light"
                    th:href="@{/borrowingBookDetailsReturn(title=${#request.getParameter('title')},

@@ -3,6 +3,7 @@ package com.project.library.b_b_service;
 import com.project.library.a_entity.Address;
 import com.project.library.a_entity.Book;
 import com.project.library.a_entity.User;
+import com.project.library.ab_helperBackingBeans.methods.DateChecking;
 import com.project.library.b_a_DAO.AddressDEO;
 import com.project.library.b_a_DAO.UserDAO;
 import lombok.AllArgsConstructor;
@@ -101,6 +102,19 @@ public class UserService {
             User user1 = userOptional.get();
             user1.setBookList(null);
             userDAO.delete(user1);
+        }
+    }
+
+    @Transactional
+    public void prolongBook(int returnedId, int userId) {
+        Optional<Book> bookOptional = bookService.findBookById(returnedId);
+        Optional<User> userOptional = userDAO.findById(userId);
+
+        if (bookOptional.isPresent() && userOptional.isPresent()) {
+            Book book = bookOptional.get();
+            User user = userOptional.get();
+            String newDate = DateChecking.prolongBook(book.getDate());
+            book.setDate(newDate);
         }
     }
 }
