@@ -9,7 +9,7 @@ import java.util.List;
 public interface DateChecking {
     static boolean thereIsAFine(String date) {
         LocalDate timeBorrowed = LocalDate.from(DateTimeFormatter.ISO_LOCAL_DATE.parse(date));
-        LocalDate nowMinus30 = LocalDate.now().minusDays(0);
+        LocalDate nowMinus30 = LocalDate.now().minusDays(7);
         if (nowMinus30.isAfter(timeBorrowed)) {
             return true;
         }
@@ -19,7 +19,7 @@ public interface DateChecking {
     static boolean thereIsAFine(List<Book> bookList) {
         for (Book book : bookList) {
             LocalDate timeBorrowed = LocalDate.from(DateTimeFormatter.ISO_LOCAL_DATE.parse(book.getDate()));
-            LocalDate nowMinus30 = LocalDate.now().minusDays(0);
+            LocalDate nowMinus30 = LocalDate.now().minusDays(7);
             if (nowMinus30.isAfter(timeBorrowed)) {
                 return true;
             }

@@ -54,12 +54,7 @@ public class AuthorService {
     }
 
     private List<AuthorHelper> fromStringToSurnameName(String authorsSN) {
-        Pattern pattern = Pattern.compile("\\w+\\s\\w+");
-        Matcher matcher = pattern.matcher(authorsSN);
-        List<String> authorsList = new ArrayList<>();
-        while (matcher.find()) {
-            authorsList.add(matcher.group(0));
-        }
+        List<String> authorsList = findRegex(authorsSN, "\\w+\\s\\w+");
 
         List<AuthorHelper> authorHelperList = new ArrayList<>();
         for (String s : authorsList) {
@@ -67,6 +62,26 @@ public class AuthorService {
             authorHelperList.add(new AuthorHelper(surnameName[0], surnameName[1]));
         }
         return authorHelperList;
+    }
+
+    private List<String> findRegex(String authorsSN, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(authorsSN);
+        List<String> authorsList = new ArrayList<>();
+        while (matcher.find()) {
+            authorsList.add(matcher.group(0));
+        }
+        return authorsList;
+    }
+
+    public List<Author> findByAuthorsName(String authorNS) {
+        List<String> stringOfNames = findRegex(authorNS, "\\w+");
+        List<Author> authorList = new ArrayList<>();
+
+        for (String name : stringOfNames) {
+            authorList.addAll(authorDAO.findAuthorsByName(name));
+        }
+        return authorList;
     }
 }
 
