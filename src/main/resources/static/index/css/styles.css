@@ -5,13 +5,13 @@ body {
 }
 
 #jumbo {
-    transition: all 500ms;
+    transition: all 1000ms;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
 }
 
 #jumbo:hover {
-    background-color: rgba(255, 255, 255, 0.08);;
+    background-color: rgba(255, 255, 255, 0.05);;
 }
 
 .bg-dark {
@@ -20,5 +20,5 @@ body {
 }
 
 .bg-dark:hover {
-    background-color: rgba(63, 65, 66, 0.6) !important;
+    background-color: rgba(63, 65, 66, 0.7) !important;
 }
