@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,7 +32,7 @@ public class AddingBookController {
         return new ModelAndView("addBookForm", "book", book);
     }
 
-    @RequestMapping("/processAddBookForm")
+    @PostMapping("/processAddBookForm")
     public String processForm(@Valid @ModelAttribute("book") BookPlusList bookPlusList,
                               BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
