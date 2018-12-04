@@ -57,7 +57,7 @@
             <div class="form-group col-md-4">
                 <label for="PESEL" class="text-light">PESEL</label>
                 <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{user.PESEL}"
-                       required pattern="\d{13}">
+                       required pattern="\d{11}">
             </div>
             <div class="form-group col-md-4">
                 <label for="telephone" class="text-light">Telephone number</label>
@@ -84,7 +84,7 @@
             <div class="form-group col-md-2">
                 <label for="apartmentNumber" class="text-light">Apartment Number</label>
                 <input type="text" class="form-control" id="apartmentNumber" placeholder="54"
-                       th:field="*{user.userDetails.address.apartmentNumber}" required maxlength="6">
+                       th:field="*{user.userDetails.address.apartmentNumber}" maxlength="6">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
@@ -98,7 +98,7 @@
                     <label for="inputZip" class="text-light">Zip</label>
                     <input type="text" class="form-control" id="inputZip"
                            placeholder="03-765" th:field="*{user.userDetails.address.postalCode}"
-                           required pattern="\d{13}">
+                           required pattern="\d{2}-\d{3}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="city" class="text-light">City</label>
@@ -115,6 +115,7 @@
                     th:if="${user.user.surname!=null}">
                 User <span th:text="${user.user.name + ' '+ user.user.surname}"></span> added
             </button>
+            <button type="button" id="error" class="btn btn-danger" th:errors="${user}"></button>
         </div>
     </form>
 </div>

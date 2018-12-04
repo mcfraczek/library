@@ -117,4 +117,12 @@ public class UserService {
             book.setDate(newDate);
         }
     }
+
+    public boolean userDontExistInDb(User user) {
+        Optional<User> userOptional = userDAO.findUserByPESEL(user.getPESEL());
+        if (userOptional.isPresent()) {
+            return false;
+        }
+        return true;
+    }
 }

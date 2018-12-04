@@ -41,7 +41,7 @@ public class AddingBookController {
             model.addAttribute("book", bookPlusList);
             return "addBookForm";
         }
-        if (bookService.checkIfBookCanBeSaved(bookPlusList.getBook())) {
+        if (bookService.bookDontExistInDb(bookPlusList.getBook())) {
             bookService.saveBook(bookPlusList.getBook());
         } else {
             bookPlusList.setBook(null);

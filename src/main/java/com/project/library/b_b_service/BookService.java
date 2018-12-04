@@ -125,7 +125,7 @@ public class BookService {
         return bookList;
     }
 
-    public boolean checkIfBookCanBeSaved(Book book) {
+    public boolean bookDontExistInDb(Book book) {
         Optional<Book> bookOptionalLibraryNumber = bookDAO.findBookByLibraryNumberIgnoreCase(book.getLibraryNumber());
         if (bookOptionalLibraryNumber.isPresent()) {
             return false;
