@@ -37,7 +37,7 @@ $("#authors").on("click", ".deleteAuthor", function () {
 });
 
 /*erase button*/
-$("#added").on("click", function () {
+$("#error").on("click", function () {
     $(this).fadeOut(500, function () {
         $(this).remove();
     });
