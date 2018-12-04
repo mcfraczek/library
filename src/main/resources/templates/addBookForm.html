@@ -71,12 +71,12 @@
         <div id="authors"></div>
         <div class="form-row mt-3">
             <div class="form-group col-md-3 text-light">
-                <label for="ISBN">ISBN</label>
+                <label for="ISBN">ISBN (13 characters)</label>
                 <input class="form-control" type="text" id="ISBN" placeholder="2789878934534"
                        th:field="*{book.ISBN}" required pattern="\d{13}">
             </div>
             <div class="form-group col-md-3 text-light">
-                <label for="number">Library Number</label>
+                <label for="number">Library Number (13 characters)</label>
                 <input class="form-control" type="text" id="number" placeholder="8367495837267"
                        th:field="*{book.libraryNumber}" required pattern="\d{13}">
             </div>
