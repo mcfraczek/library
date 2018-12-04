@@ -2,12 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./bootstrap4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./index/css/styles.css">
+
     <title>Home</title>
 </head>
 <body>
-<h1 th:text="${'Home'}"></h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<a href="#" th:href="@{/addUser}">addUser</a>
-<a href="#" th:href="@{/addBook}">addBook</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Home<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/addUser}" href="#">Add User</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/addBook}" href="#">Add Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/borrowingBookForm}" href="#">Borrow/Return Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/searchForABook}" href="#">Search For A Book</a>
+            </div>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/quickSearch}">
+                <input class="form-control mr-sm-2" type="search" name="searched" placeholder="Quick Search"
+                       aria-label="Search">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search &nbsp;<i
+                        class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container text-center pt-5">
+    <div id="jumbo" class="jumbotron mt-5 rounded-circle">
+        <h1 class="display-2">Welcome!</h1>
+        <p class="lead">This is a simple library web application</p>
+        <hr class="my-4">
+        <p>Click the button below to learn more about this application, and explore it's features, or feel free to
+            explore it on Your own</p>
+        <a class="btn btn-warning btn-lg" href="#" role="button">Learn more</a>
+    </div>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="./bootstrap4/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -2,89 +2,127 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./bootstrap4/css/bootstrap.min.css">
     <link rel="stylesheet" href="./addUserForm/css/styles.css">
     <title>AddUserForm</title>
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" href="#">Home<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <div class="nav-item">
+                <a class="nav-link disabled" th:href="@{/addUser}" href="#">Add User</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/addBook}" href="#">Add Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/borrowingBookForm}" href="#">Borrow/Return Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/searchForABook}" href="#">Search For A Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/}" href="#">Back</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
     <form method="post" th:action="@{/processAddUserForm}" th:object="${user}">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{user.name}">
+                <label for="name" class="text-light">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="John" th:field="*{user.name}"
+                       required maxlength="45">
             </div>
             <div class="form-group col-md-6">
-                <label for="surname">Surname</label>
-                <input type="text" class="form-control" id="surname" placeholder="Surname" th:field="*{user.surname}">
+                <label for="surname" class="text-light">Surname</label>
+                <input type="text" class="form-control" id="surname" placeholder="Kowalski" th:field="*{user.surname}"
+                       required maxlength="45">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="PESEL">PESEL</label>
-                <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{user.PESEL}">
+                <label for="PESEL" class="text-light">PESEL</label>
+                <input type="text" class="form-control" id="PESEL" placeholder="900512387623" th:field="*{user.PESEL}"
+                       required pattern="\d{11}">
             </div>
             <div class="form-group col-md-4">
-                <label for="telephone">Telephone number</label>
+                <label for="telephone" class="text-light">Telephone number</label>
                 <input type="text" class="form-control" id="telephone" placeholder="602986739"
-                       th:field="*{user.userDetails.telNumber}">
+                       th:field="*{user.userDetails.telNumber}" required maxlength="20">
             </div>
             <div class="form-group col-md-4">
-                <label for="email">Email</label>
+                <label for="email" class="text-light">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="bob@gmail.com"
-                       th:field="*{user.userDetails.email}">
+                       th:field="*{user.userDetails.email}" required maxlength="40">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-8">
-                <label for="street">Street</label>
+                <label for="street" class="text-light">Street</label>
                 <input type="text" class="form-control" id="street" placeholder="St. John"
-                       th:field="*{user.userDetails.address.street}">
+                       th:field="*{user.userDetails.address.street}" required maxlength="40">
             </div>
             <div class="form-group col-md-2">
-                <label for="streetNumber">Street Number</label>
+                <label for="streetNumber" class="text-light">Street Number</label>
                 <input type="text" class="form-control" id="streetNumber" placeholder="2b"
-                       th:field="*{user.userDetails.address.streetNumber}">
+                       th:field="*{user.userDetails.address.streetNumber}" required maxlength="6">
             </div>
             <div class="form-group col-md-2">
-                <label for="apartmentNumber">Apartment Number</label>
+                <label for="apartmentNumber" class="text-light">Apartment Number</label>
                 <input type="text" class="form-control" id="apartmentNumber" placeholder="54"
-                       th:field="*{user.userDetails.address.apartmentNumber}">
+                       th:field="*{user.userDetails.address.apartmentNumber}" maxlength="6">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="county">County</label>
-                    <select id="county" class="form-control" th:field="*{user.userDetails.address.county}">
-                        <option selected value="none" disabled="disabled">Choose...</option>
+                    <label for="county" class="text-light">County</label>
+                    <select id="county" class="form-control" th:field="*{user.userDetails.address.county}" required>
+                        <option selected="selected" value="choose" disabled="disabled">Choose</option>
                         <option th:each="c : ${user.listFromDirectFile()}" th:text="${c}" th:value="${c}"></option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
+                    <label for="inputZip" class="text-light">Zip</label>
                     <input type="text" class="form-control" id="inputZip"
-                           th:field="*{user.userDetails.address.postalCode}">
+                           placeholder="03-765" th:field="*{user.userDetails.address.postalCode}"
+                           required pattern="\d{2}-\d{3}">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" th:field="*{user.userDetails.address.city}">
+                    <label for="city" class="text-light">City</label>
+                    <input type="text" class="form-control" id="city" placeholder="Warszawa"
+                           th:field="*{user.userDetails.address.city}" required maxlength="30">
                 </div>
-                <div class="form-check col-md-2">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                <div class="col-md-4 d-flex align-items-center">
+                    <button type="submit" class="btn btn-warning mt-3">Save User</button>
                 </div>
             </div>
+        </div>
+        <div class="form-row mt-2">
+            <button type="button" id="userAdded" class="btn btn-warning"
+                    th:if="${user.user.surname!=null}">
+                User <span th:text="${user.user.name + ' '+ user.user.surname}"></span> added
+            </button>
+            <button type="button" id="error" class="btn btn-danger" th:errors="${user}"></button>
         </div>
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -92,5 +130,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script type="text/javascript" src="./addUserForm/js/script.js"></script>
 </body>
 </html>

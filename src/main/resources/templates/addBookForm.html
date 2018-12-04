@@ -2,63 +2,116 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./bootstrap4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./bootstrap4/css/bootstrap-grid.min.css"/>
     <link rel="stylesheet" href="./addBookForm/css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <title>AddBook</title>
 </head>
 <body>
-<div class="container">
-    <h1 th:text="${'Add Book'}"></h1>
-    <form action="#" th:action="@{/processAddBookForm}" th:object="${book}">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" href="#">Home<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <div class="nav-item">
+                <a class="nav-link text-white" th:href="@{/addUser}" href="#">Add User</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link disabled" th:href="@{/addBook}" href="#">Add Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/borrowingBookForm}" href="#">Borrow/Return Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/searchForABook}" href="#">Search For A Book</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-light" th:href="@{/}" href="#">Back</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5 align-self-center">
+    <form th:action="@{/processAddBookForm}" th:object="${book}" method="post">
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="title">Title</label>
+            <div class="form-group col-md-12">
+                <label for="title" class="text-light">Title</label>
                 <input class="form-control" type="text" id="title" placeholder="Winnie The Pooh"
-                       th:field="*{book.title}">
+                       th:field="*{book.title}" required maxlength="60">
             </div>
-        </div>
-        <div class="form-row" id="copyTo">
-            <div class="form-group col-md-6">
-                <label for="author2">Author</label>
-                <input class="form-control" type="text" id="author2" placeholder="Alan Alexander Milne"
-                       th:field="*{book.title}">
-            </div>
-            <p>
-                <button type="button" class="btn btn-primary" id="addAuthor">Add Author +</button>
-            </p>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="ISBN">ISBN</label>
-                <input class="form-control" type="text" id="ISBN" placeholder="978-2-1234-5680-3"
-                       th:field="*{book.ISBN}">
+            <div class="form-group col-md-5 text-light mb-0">
+                <label for="authorName">Author's Name/Names</label>
+                <input type="text" class="form-control" name="book.authorList[0].name" id="authorName"
+                       placeholder="Alan Aleksander" required maxlength="45">
             </div>
-            <div class="form-group col-md-3">
-                <label for="number">Library Number</label>
-                <input class="form-control" type="text" id="number" placeholder="978-2-1234-5680-3"
-                       th:field="*{book.libraryNumber}">
+            <div class="form-group col-md-5 text-light mb-0">
+                <label for="authorSurname">Author's Surname</label>
+                <input type="text" class="form-control" name="book.authorList[0].surname" id="authorSurname"
+                       placeholder="Milne" required maxlength="45">
             </div>
-            <div class="form-group col-md-3" id="copy2">
-                <label for="genre">Genre</label>
-                <select id="genre" class="form-control" th:field="*{book.title}">
-                    <option selected value="choose..." disabled="disabled">choose...</option>
-                    <option th:each="g : ${book.listFromDirectFile()}" th:text="${g}" th:value="${g}">science-fiction
-                    </option>
-                </select>
-            </div>
-            <div class="form-group col-md-3">
-                <button type="button" class="btn btn-primary" id="addGenre">Add Genre</button>
+            <div class="col-md-2 d-flex justify-content-center align-items-end">
+                <button type="button" class="btn btn-light btn-sm mb-1" id="addAuthor"><i class="fas fa-user-plus"></i>
+                </button>
             </div>
         </div>
-        <div class="form-row rightMine">
-            <div id="copyTo2" class="col-md-12"></div>
+        <div id="authors"></div>
+        <div class="form-row mt-3">
+            <div class="form-group col-md-3 text-light">
+                <label for="ISBN">ISBN (13 characters)</label>
+                <input class="form-control" type="text" id="ISBN" placeholder="2789878934534"
+                       th:field="*{book.ISBN}" required pattern="\d{13}">
+            </div>
+            <div class="form-group col-md-3 text-light">
+                <label for="number">Library Number (13 characters)</label>
+                <input class="form-control" type="text" id="number" placeholder="8367495837267"
+                       th:field="*{book.libraryNumber}" required pattern="\d{13}">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="genre" class="text-light">Genre</label>
+                <div id="copyFrom">
+                    <select id="genre" class="form-control" name="book.typeList[0].type">
+                        <option selected value="choose..." disabled="disabled">choose...</option>
+                        <option th:each="g : ${book.listFromDirectFile()}" th:text="${g}" th:value="${g}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-2 d-flex justify-content-center align-items-end">
+                <button type="button" class="btn btn-light btn-sm mb-1" id="addGenre">Add Genre</button>
+            </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <div class="row">
+            <div class="col-md-3">
+                <button id="added" type="button" class="btn btn-warning" th:if="${book.book.title!=null}"
+                        th:text="${book.book.title} + ' added'"></button>
+                <button id="error" type="button" class="btn btn-danger" th:errors="${book}"></button>
+            </div>
+            <div class="col-md-3"></div>
+            <div id="types" class="form-row col-md-4 w-100 pr-0 mr-1">
+            </div>
+            <div class="col-md-2 d-flex justify-content-center align-items-start">
+                <input type="submit" id="submit" class="btn btn-warning mr-3" value="Save Book">
+            </div>
+        </div>
     </form>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
