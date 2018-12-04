@@ -1,6 +1,8 @@
 var authorCount = 1;
 var divRowOpen = '<div class="form-row">';
 var divRowOpenClass = '<div class="form-row mt-3">';
+var divRowOpenClass2 = '<div class="form-row w-100 px-0 mb-3">';
+var divColOpenClass12 = '<div class="col-md-12 px-0">'
 var button = ' <div class="col-md-2 d-flex justify-content-center align-items-end"><button type="button" class="btn btn-light btn-sm mb-1 deleteAuthor" ><i class="fas fa-user-minus"></i></button></div>';
 
 function divColOpen(col) {
@@ -26,7 +28,7 @@ $("#addGenre").on("click", function () {
     var str = typesFrom;
     var re = /([\d+])/g;
     var newstr = str.replace(re, typesCount++);
-    typesCopyTo.append(divRowOpen + divColOpen(7) + divClose + divColOpen(5) + newstr + divClose + divClose);
+    typesCopyTo.append(divRowOpenClass2 + divColOpenClass12 + newstr + divClose + divClose);
 });
 /*erase Authors*/
 
