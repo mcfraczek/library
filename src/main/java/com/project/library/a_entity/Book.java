@@ -31,6 +31,7 @@ public class Book {
     private String libraryNumber;
     @Column(name = "time_stamp")
     private String date;
+    @Valid
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "book_type", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "type_id"))
