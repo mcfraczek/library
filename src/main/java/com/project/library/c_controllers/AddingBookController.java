@@ -5,6 +5,7 @@ import com.project.library.b_b_service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -32,8 +33,11 @@ public class AddingBookController {
 
     @RequestMapping("/processAddBookForm")
     public String processForm(@Valid @ModelAttribute("book") BookPlusList bookPlusList,
-                              BindingResult bindingResult) {
+                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult);
+            bookPlusList.setBook(null);
+            model.addAttribute("book", bookPlusList);
             return "addBookForm";
         }
         bookService.saveBook(bookPlusList.getBook());
