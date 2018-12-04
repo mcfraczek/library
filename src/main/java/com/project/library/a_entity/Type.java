@@ -3,6 +3,7 @@ package com.project.library.a_entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 @Data
 @Entity
@@ -11,6 +12,7 @@ public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Size(max = 60, message = "Type name must not exceed 6 characters")
     @Column(name = "type")
     private String type;
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
