@@ -7,6 +7,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,7 +41,14 @@ public class AddingUserController {
             model.addAttribute("user", userPlusList);
             return "addUserForm";
         }
-        userService.saveUser(userPlusList.getUser());
+        if (userService.userDontExistInDb(userPlusList.getUser())) {
+            userService.saveUser(userPlusList.getUser());
+        } else {
+            userPlusList.setUser(null);
+            model.addAttribute("user", userPlusList);
+            bindingResult.addError(new ObjectError("user", "User already exist"));
+            return "addUserForm";
+        }
         return "addUserForm";
     }
 }

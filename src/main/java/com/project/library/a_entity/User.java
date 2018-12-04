@@ -27,7 +27,7 @@ public class User {
     @NotNull
     @Size(max = 11, min = 11, message = "PESEL must be exactly 11 characters long")
     @Column(name = "PESEL")
-    private String PESEL;
+    private String pESEL;
     @Valid
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_details_id")
