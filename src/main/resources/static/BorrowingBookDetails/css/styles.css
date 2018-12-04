@@ -19,9 +19,9 @@ body {
 
 .bg-dark {
     transition: 500ms;
-    background-color: rgba(63, 65, 66, 0.4) !important;
+    background-color: rgba(63, 65, 66, 0.5) !important;
 }
 
 .bg-dark:hover {
-    background-color: rgba(63, 65, 66, 0.5) !important;
+    background-color: rgba(63, 65, 66, 0.7) !important;
 }
