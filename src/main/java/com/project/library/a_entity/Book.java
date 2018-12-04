@@ -24,7 +24,7 @@ public class Book {
     @NotNull
     @Size(min = 13, max = 13, message = "ISBN must be exactly 13 characters long")
     @Column(name = "isbn")
-    private String ISBN;
+    private String iSBN;
     @NotNull
     @Size(min = 13, max = 13, message = "Library number must be exactly 13 characters long")
     @Column(name = "library_number")

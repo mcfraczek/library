@@ -7,6 +7,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,11 +38,17 @@ public class AddingBookController {
                               BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult);
-            bookPlusList.setBook(null);
             model.addAttribute("book", bookPlusList);
             return "addBookForm";
         }
-        bookService.saveBook(bookPlusList.getBook());
+        if (bookService.checkIfBookCanBeSaved(bookPlusList.getBook())) {
+            bookService.saveBook(bookPlusList.getBook());
+        } else {
+            bookPlusList.setBook(null);
+            model.addAttribute("book", bookPlusList);
+            bindingResult.addError(new ObjectError("book", "Book already exist"));
+            return "addBookForm";
+        }
         return "addBookForm";
     }
 }
