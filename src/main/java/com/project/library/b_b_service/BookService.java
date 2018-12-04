@@ -22,7 +22,7 @@ public class BookService {
     private BookDAO bookDAO;
     private TypeService typeService;
 
-    private static boolean ifIwantThisBook(List<Author> authorList, Book book) {
+    private static boolean ifIWantThisBook(List<Author> authorList, Book book) {
         for (Author author : authorList) {
             if (!author.getBookList().contains(book)) {
                 return false;
@@ -97,7 +97,7 @@ public class BookService {
                 .stream()
                 .flatMap(author -> author.getBookList()
                         .stream())
-                .filter(b -> ifIwantThisBook(authorList, b)).distinct()
+                .filter(b -> ifIWantThisBook(authorList, b)).distinct()
                 .collect(Collectors.toList());
         return bookList;
     }
@@ -124,6 +124,19 @@ public class BookService {
                 .getResultList();
         return bookList;
     }
+
+    public boolean checkIfBookCanBeSaved(Book book) {
+        Optional<Book> bookOptionalLibraryNumber = bookDAO.findBookByLibraryNumberIgnoreCase(book.getLibraryNumber());
+        if (bookOptionalLibraryNumber.isPresent()) {
+            return false;
+        }
+        Optional<Book> bookOptionalISBN = bookDAO.findBookByISBN(book.getISBN());
+        if (bookOptionalISBN.isPresent()) {
+            return false;
+        }
+        return true;
+    }
+
 
     @Transactional
     public void saveBook(Book book) {
