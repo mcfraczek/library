@@ -32,3 +32,15 @@ form:hover {
     background-color: rgba(120, 52, 45, 1) !important;
     border-color: rgba(120, 52, 45, 1) !important;
 }
+
+.btn-success {
+    color: #fff;
+    background-color: rgba(79, 121, 80, 0.8) !important;
+    border-color: rgba(79, 121, 80, 0.8) !important;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: rgb(79, 121, 80) !important;
+    border-color: rgb(79, 121, 80) !important;
+}
