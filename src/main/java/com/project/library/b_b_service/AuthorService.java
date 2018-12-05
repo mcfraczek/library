@@ -86,10 +86,10 @@ public class AuthorService {
     }
 
     public List<Author> findByAuthorsSurname(String authorNS) {
-        List<String> strimgOfSurnames = findRegex(authorNS, "\\w+");
+        List<String> stringOfSurnames = findRegex(authorNS, "\\w+");
         List<Author> authorList = new ArrayList<>();
 
-        for (String surname : strimgOfSurnames) {
+        for (String surname : stringOfSurnames) {
             authorList.addAll(authorDAO.findAuthorsBySurnameIgnoreCase(surname));
         }
         return authorList;
