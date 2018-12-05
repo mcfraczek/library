@@ -194,7 +194,8 @@
                             <thead>
                             <tr>
                                 <th scope="row"></th>
-                                <th scope="col">Authors</th>
+                                <th th:if="${bl.authorList.size()>1}" scope="col">Authors</th>
+                                <th th:if="${bl.authorList.size()==1}" scope="col">Author</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -211,7 +212,8 @@
                             <thead>
                             <tr>
                                 <th scope="row"></th>
-                                <th scope="col">Genres</th>
+                                <th th:if="${bl.typeList.size()>1}" scope="col">Genres</th>
+                                <th th:if="${bl.typeList.size()==1}" scope="col">Genre</th>
                             </tr>
                             </thead>
                             <tbody>

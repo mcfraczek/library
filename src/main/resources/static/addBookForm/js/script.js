@@ -51,6 +51,11 @@ $("#error").on("click", function () {
         $(this).remove();
     });
 });
+$("#added").on("click", function () {
+    $(this).fadeOut(500, function () {
+        $(this).remove();
+    });
+});
 /*
 $('input[type="submit"]').on("click", function () {
     var html;
