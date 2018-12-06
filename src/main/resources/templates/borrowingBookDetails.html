@@ -147,7 +147,6 @@
     <div class="container mt-5">
         <h1 class="display-3 text-center text-light" th:if="${bookList.size()==0}">No Records Found</h1>
     </div>
-
     <div th:if="${bookList.size()>0}">
         <div class="container mt-5" th:each="bl : ${bookList}">
             <div class="opacity">
@@ -165,6 +164,7 @@
                                th:unless="${#request.getParameter('title'==null)}">Borrow</a>
 
                             <span th:if="${bl.date!=null}">
+                                <!--<span th:if="${bl.user!=null}">&lt;!&ndash;to pomaga&ndash;&gt;-->
                             <button class="btn btn-light mr-3 disabled"
                                     th:if="${#session.getAttribute('id')==bl.user.id}"
                                     th:text="${'Borrowed by this user '+bl.date}">
@@ -173,6 +173,7 @@
                                     th:if="${#session.getAttribute('id')!=bl.user.id}"
                                     th:text="${'Borrowed '+bl.date}">
                             </button>
+                                <!--</span>-->
                         </span>
                         </td>
                     </tr>

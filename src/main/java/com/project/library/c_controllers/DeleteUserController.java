@@ -20,27 +20,26 @@ public class DeleteUserController {
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
             @RequestParam("userId") int userId, Model model) {
-        /*Żeby lista nie zgasła*/
-        List<User> userList = userService.getUsers(name, surname);
-        model.addAttribute("userList", userList);
 
         if (userService.userDontHaveBooks(userId)) {
             userService.deleteUser(userId);
         } else {
             model.addAttribute("error", "User must return books, before he is deleted");
         }
+        /*Żeby lista nie zgasła*/
+        List<User> userList = userService.getUsers(name, surname);
+        model.addAttribute("userList", userList);
         return "borrowingBookForm";
     }
 
-/*    @RequestMapping("/borrowingBookDetailsForceDeleteUser")
+    @RequestMapping("/borrowingBookDetailsForceDeleteUser")
     public String borrowingBookDetailsForceDeleteUser(@RequestParam("name") String name,
                                                       @RequestParam("surname") String surname,
                                                       @RequestParam("userId") int userId, Model model) {
-        *//*Żeby lista nie zgasła*//*
+        userService.forceDeleteUser(userId);
+        /*Żeby lista nie zgasła*/
         List<User> userList = userService.getUsers(name, surname);
         model.addAttribute("userList", userList);
-
-        userService.forceDeleteUser(userId);
         return "borrowingBookForm";
-    }*/
+    }
 }

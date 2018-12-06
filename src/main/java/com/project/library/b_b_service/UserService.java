@@ -144,6 +144,7 @@ public class UserService {
             User user1 = optionalUser.get();
             List<Book> bookList = user1.getBookList();
             for (Book book : bookList) {
+                book.setDate(null);
                 book.setUser(null);
             }
             userDAO.delete(user1);

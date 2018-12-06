@@ -45,7 +45,6 @@ public class BorrowingBookController {
         Optional<User> user = userService.findById(userId);
         BooksPlusList booksPlusList = new BooksPlusList();
         user.ifPresent(u -> booksPlusList.setBookList(u.getBookList()));
-
         model.addAttribute("books", booksPlusList);
         return "borrowingBookDetails";
     }
@@ -67,7 +66,6 @@ public class BorrowingBookController {
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
-
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         model.addAttribute("bookList", bookList);
         return "borrowingBookDetails";
