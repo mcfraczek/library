@@ -56,3 +56,12 @@ form:hover {
     background-color: rgba(214, 86, 98, 1) !important;
     border-color: rgba(214, 86, 98, 1) !important;
 }
+
+#oneLink:hover {
+    color: gray !important;
+    transition: 500ms;
+}
+
+#oneLink {
+    color: white !important;
+}

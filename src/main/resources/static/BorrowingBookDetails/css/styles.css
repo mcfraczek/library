@@ -61,3 +61,12 @@ body {
     background-color: rgba(35, 60, 102, 1) !important;
     border-color: rgba(35, 60, 102, 1) !important;
 }
+
+#oneLink:hover {
+    color: gray !important;
+    transition: 500ms;
+}
+
+#oneLink {
+    color: white !important;
+}
