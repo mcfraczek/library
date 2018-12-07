@@ -15,24 +15,34 @@ public class QuickSearchService {
     public List<Book> search(String searched) {
         List<Book> bookList = null;
 
-        bookList = bookService.find("", "", searched, "Choose...");
+        bookList = bookService.findFirst("", "", searched, "Choose...");
         if (!bookList.isEmpty()) {
             return bookList;
         }
-        bookList = bookService.find(searched, "", "", "Choose...");
+        bookList = bookService.findFirst(searched, "", "", "Choose...");
         if (!bookList.isEmpty()) {
             return bookList;
         }
-
-        bookList = bookService.find("", searched, "", "Choose...");
+        bookList = bookService.findFirst("", searched, "", "Choose...");
         if (!bookList.isEmpty()) {
             return bookList;
         }
-        bookList = bookService.find("", "", "", searched);
+        bookList = bookService.findFirst("", "", "", searched);
         if (!bookList.isEmpty()) {
             return bookList;
         }
-
+        bookList = bookService.afterFirstSearchStillNoResults(searched, "", "Choose...");
+        if (!bookList.isEmpty()) {
+            return bookList;
+        }
+        bookList = bookService.afterFirstSearchStillNoResults("", searched, "Choose...");
+        if (!bookList.isEmpty()) {
+            return bookList;
+        }
+        bookList = bookService.afterFirstSearchStillNoResults("", "", searched);
+        if (!bookList.isEmpty()) {
+            return bookList;
+        }
         return new ArrayList<>();
     }
 }

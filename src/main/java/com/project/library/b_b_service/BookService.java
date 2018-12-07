@@ -31,8 +31,18 @@ public class BookService {
         return true;
     }
 
-    @Transactional/*(readOnly = true)*//*tylko do czytania*/
+    @Transactional
     public List<Book> find(String title, String authorNS, String libraryNumber, String genre) {
+        List<Book> bookList = findFirst(title, authorNS, libraryNumber, genre);
+        if (bookList.isEmpty()) {
+            bookList = afterFirstSearchStillNoResults(title, authorNS, genre);
+        }
+        return bookList;
+    }
+
+    /*(readOnly = true)*//*tylko do czytania*/
+    @Transactional
+    public List<Book> findFirst(String title, String authorNS, String libraryNumber, String genre) {
         List<Book> bookList = null;
         /*jeśli nr biblioteczny jest - szukaj po nim
          * potem nie jest brany pod uwagę*/
@@ -45,16 +55,7 @@ public class BookService {
         } else if (title.isEmpty() && genre.equals("Choose...")) {
             bookList = new ArrayList<>();
             /*mamy autorów*/
-            List<Author> authorList = authorService.findByAuthor(authorNS);
-            bookList = getBooksFromAuthorList(authorList);
-            if (bookList.isEmpty()) {
-                bookList = getBooksFromAuthorList(authorService.findByAuthorsName(authorNS));
-                /*szukaj czy to są tylko nazwiska*/
-                /*jeśli nadal jest pusta - zobacz, czy to nie tylko imiona*/
-            }
-            if (bookList.isEmpty()) {
-                bookList = getBooksFromAuthorList(authorService.findByAuthorsSurname(authorNS));
-            }
+            bookList = getBookListFromAuthorNS(authorNS);
         } else if (title.isEmpty() && authorNS.isEmpty()) {
             /*find by type*/
             bookList = new ArrayList<>();
@@ -86,6 +87,63 @@ public class BookService {
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
             if (typeOptional.isPresent()) {
                 bookList = bookDAO.findBooksByTitleIgnoreCaseAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
+            }
+        }
+        return bookList;
+    }
+
+    private List<Book> getBookListFromAuthorNS(String authorNS) {
+        List<Book> bookList;
+        List<Author> authorList = authorService.findByAuthor(authorNS);
+        bookList = getBooksFromAuthorList(authorList);
+        if (bookList.isEmpty()) {
+            bookList = getBooksFromAuthorList(authorService.findByAuthorsName(authorNS));
+            /*szukaj czy to są tylko nazwiska*/
+            /*jeśli nadal jest pusta - zobacz, czy to nie tylko imiona*/
+        }
+        if (bookList.isEmpty()) {
+            bookList = getBooksFromAuthorList(authorService.findByAuthorsSurname(authorNS));
+        }
+        return bookList;
+    }
+
+    public List<Book> afterFirstSearchStillNoResults(String title, String authorNS, String genre) {
+        List<Book> bookList = new ArrayList<>();
+        if (!title.isEmpty() && !authorNS.isEmpty() && !genre.equals("Choose...")) {
+            /*wszystko wypełnione*/
+            List<Author> authorList = authorService.findByAuthor(authorNS);
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsSurname(authorNS);
+            }
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsName(authorNS);
+            }
+            Optional<Type> typeOptional = typeService.findTypeByType(genre);
+            if (!typeOptional.isPresent()) {
+                typeOptional = typeService.findTypeByTypeContaining(genre);
+            }
+            if (typeOptional.isPresent()) {
+                bookList = bookDAO.findBooksByTitleContainingIgnoreCaseAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
+            }
+        }
+        if (genre.equals("Choose...")) {
+            /*mamy tytuł i autorów*/
+            List<Author> authorList = authorService.findByAuthor(authorNS);
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsSurname(authorNS);
+            }
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsName(authorNS);
+            }
+            bookList = bookDAO.findBooksByTitleContainingIgnoreCaseAndAuthorList(title, authorList);
+        }
+        if (genre.equals("Choose...") && authorNS.isEmpty()) {
+            /*mamy tylko tytuł*/
+            bookList = bookDAO.findBooksByTitleContaining(title);
+        } else if (title.isEmpty() && authorNS.isEmpty()) {
+            Optional<Type> typeOptional = typeService.findTypeByTypeContaining(genre);
+            if (typeOptional.isPresent()) {
+                bookList = bookDAO.findBooksByTypeListContaining(typeOptional.get());
             }
         }
         return bookList;

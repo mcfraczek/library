@@ -36,7 +36,6 @@ public class SearchingForBookController {
         BookPlusList bookPlusList = new BookPlusList();
         model.addAttribute("books", bookPlusList);
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
-
         return new ModelAndView("searchForABook", "bookList", bookList);
     }
 }

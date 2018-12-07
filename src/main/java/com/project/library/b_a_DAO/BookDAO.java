@@ -26,5 +26,11 @@ public interface BookDAO extends CrudRepository<Book, Integer> {
     Optional<Book> findBookByLibraryNumberIgnoreCase(String libraryNumber);
 
     Optional<Book> findBookByISBN(String ISBN);
+
+    List<Book> findBooksByTitleContaining(String title);
+
+    List<Book> findBooksByTitleContainingIgnoreCaseAndAuthorList(String title, List<Author> authorList);
+
+    List<Book> findBooksByTitleContainingIgnoreCaseAndAuthorListAndTypeListContaining(String string, List<Author> authorList, Type type);
 }
 
