@@ -32,3 +32,15 @@ body {
     background-color: rgba(120, 52, 45, 1) !important;
     border-color: rgba(120, 52, 45, 1) !important;
 }
+
+.btn-myDanger {
+    color: #fff;
+    background-color: rgba(214, 86, 98, 0.8) !important;
+    border-color: rgba(214, 86, 98, 0.8) !important;
+}
+
+.btn-myDanger:hover {
+    color: #fff;
+    background-color: rgba(214, 86, 98, 1) !important;
+    border-color: rgba(214, 86, 98, 1) !important;
+}

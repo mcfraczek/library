@@ -73,7 +73,7 @@
                 <td class="">
                     <span th:text="${b.date}" class="date">13-03-2019</span>
                 </td>
-                <td><a class="btn btn-warning"
+                <td><a class="btn btn-primary"
                        th:if="${!T(com.project.library.ab_helperBackingBeans.methods.DateChecking).thereIsAFine(b.date)}"
                        th:href="@{/borrowingBookDetailsProlong(title=${#request.getParameter('title')},
                            authorNS=${#request.getParameter('authorNS')},libraryNumber=${#request.getParameter('libraryNumber')},

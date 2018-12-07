@@ -49,3 +49,15 @@ body {
     background-color: rgb(79, 121, 80) !important;
     border-color: rgb(79, 121, 80) !important;
 }
+
+.btn-primary {
+    color: #ffffff !important;
+    background-color: rgba(35, 60, 102, 0.8) !important;
+    border-color: rgba(35, 60, 102, 0.8) !important;
+}
+
+.btn-primary:hover {
+    color: #ffffff !important;
+    background-color: rgba(35, 60, 102, 1) !important;
+    border-color: rgba(35, 60, 102, 1) !important;
+}
