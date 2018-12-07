@@ -39,6 +39,10 @@ public class QuickSearchService {
         if (!bookList.isEmpty()) {
             return bookList;
         }
+        bookList = bookService.afterFirstSearchStillNoResults("", "", searched);
+        if (!bookList.isEmpty()) {
+            return bookList;
+        }
         return new ArrayList<>();
     }
 }

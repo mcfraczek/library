@@ -11,4 +11,6 @@ public interface TypeDEO extends CrudRepository<Type, Integer> {
     Optional<Type> findTypeByTypeIgnoreCase(String type);
 
     List<Type> findTypeByBookListContaining(Book book);
+
+    Optional<Type> findTypeByTypeContainingIgnoreCase(String type);
 }

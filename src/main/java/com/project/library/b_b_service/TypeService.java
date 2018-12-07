@@ -21,4 +21,8 @@ public class TypeService {
     public List<Type> findTypesByBook(Book book) {
         return typeDEO.findTypeByBookListContaining(book);
     }
+
+    public Optional<Type> findTypeByTypeContaining(String type) {
+        return typeDEO.findTypeByTypeContainingIgnoreCase(type);
+    }
 }

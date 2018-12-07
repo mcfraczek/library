@@ -119,6 +119,9 @@ public class BookService {
                 authorList = authorService.findByAuthorsName(authorNS);
             }
             Optional<Type> typeOptional = typeService.findTypeByType(genre);
+            if (!typeOptional.isPresent()) {
+                typeOptional = typeService.findTypeByTypeContaining(genre);
+            }
             if (typeOptional.isPresent()) {
                 bookList = bookDAO.findBooksByTitleContainingIgnoreCaseAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
             }
@@ -137,13 +140,12 @@ public class BookService {
         if (genre.equals("Choose...") && authorNS.isEmpty()) {
             /*mamy tylko tytuł*/
             bookList = bookDAO.findBooksByTitleContaining(title);
-        } else if (title.isEmpty() && genre.equals("Choose...")) {
-            /*może do skasowania*/
-            bookList = getBookListFromAuthorNS(authorNS);
         } else if (title.isEmpty() && authorNS.isEmpty()) {
-            /**/
+            Optional<Type> typeOptional = typeService.findTypeByTypeContaining(genre);
+            if (typeOptional.isPresent()) {
+                bookList = bookDAO.findBooksByTypeListContaining(typeOptional.get());
+            }
         }
-
         return bookList;
     }
 
