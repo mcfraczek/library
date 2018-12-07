@@ -1,6 +1,7 @@
 package com.project.library.c_controllers;
 
 import com.project.library.a_entity.User;
+import com.project.library.ab_helperBackingBeans.methods.MyError;
 import com.project.library.b_b_service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class DeleteUserController {
         if (userService.userDontHaveBooks(userId)) {
             userService.deleteUser(userId);
         } else {
-            model.addAttribute("error", "User must return books, before he is deleted");
+            model.addAttribute("myError", new MyError("User must return books, before he is deleted", userId));
         }
         /*Żeby lista nie zgasła*/
         List<User> userList = userService.getUsers(name, surname);
