@@ -25,3 +25,27 @@ body {
 .bg-dark:hover {
     background-color: rgba(63, 65, 66, 0.7) !important;
 }
+
+.btn-warning {
+    color: #ffffff !important;
+    background-color: rgba(120, 52, 45, 0.9) !important;
+    border-color: rgba(120, 52, 45, 0.9) !important;
+}
+
+.btn-warning:hover {
+    color: #ffffff !important;
+    background-color: rgba(120, 52, 45, 1) !important;
+    border-color: rgba(120, 52, 45, 1) !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: rgba(79, 121, 80, 0.8) !important;
+    border-color: rgba(79, 121, 80, 0.8) !important;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: rgb(79, 121, 80) !important;
+    border-color: rgb(79, 121, 80) !important;
+}
