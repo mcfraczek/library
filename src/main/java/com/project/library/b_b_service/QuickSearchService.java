@@ -39,8 +39,6 @@ public class QuickSearchService {
         if (!bookList.isEmpty()) {
             return bookList;
         }
-
-
         return new ArrayList<>();
     }
 }

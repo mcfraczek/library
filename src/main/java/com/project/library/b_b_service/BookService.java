@@ -109,10 +109,30 @@ public class BookService {
 
     public List<Book> afterFirstSearchStillNoResults(String title, String authorNS, String genre) {
         List<Book> bookList = new ArrayList<>();
-
+        if (!title.isEmpty() && !authorNS.isEmpty() && !genre.equals("Choose...")) {
+            /*wszystko wypełnione*/
+            List<Author> authorList = authorService.findByAuthor(authorNS);
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsSurname(authorNS);
+            }
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsName(authorNS);
+            }
+            Optional<Type> typeOptional = typeService.findTypeByType(genre);
+            if (typeOptional.isPresent()) {
+                bookList = bookDAO.findBooksByTitleContainingIgnoreCaseAndAuthorListAndTypeListContaining(title, authorList, typeOptional.get());
+            }
+        }
         if (genre.equals("Choose...")) {
             /*mamy tytuł i autorów*/
-            bookList = bookDAO.findBooksByTitleContainingIgnoreCaseAndAuthorList(title, authorService.findByAuthor(authorNS));
+            List<Author> authorList = authorService.findByAuthor(authorNS);
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsSurname(authorNS);
+            }
+            if (authorList.isEmpty()) {
+                authorList = authorService.findByAuthorsName(authorNS);
+            }
+            bookList = bookDAO.findBooksByTitleContainingIgnoreCaseAndAuthorList(title, authorList);
         }
         if (genre.equals("Choose...") && authorNS.isEmpty()) {
             /*mamy tylko tytuł*/
