@@ -13,7 +13,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Library</a>
+        <a class="navbar-brand" th:href="@{/}">Library</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" id="oneLink" th:href="@{/}" href="#"><i class="fas fa-home"></i><span
+                            class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <div class="nav-item">
@@ -63,8 +64,12 @@
                 <input type="text" class="form-control" name="book.authorList[0].surname" id="authorSurname"
                        placeholder="Milne" required maxlength="45">
             </div>
-            <div class="col-md-2 d-flex justify-content-center align-items-end">
-                <button type="button" class="btn btn-light btn-sm mb-1" id="addAuthor"><i class="fas fa-user-plus"></i>
+            <div class="col-md-2 d-flex justify-content-around align-items-end">
+                <button type="button" class="btn btn-myDanger btn-sm px-3 mb-1" id="eraseAuthor"><i
+                        class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-success btn-sm px-3 mb-1" id="addAuthor"><i
+                        class="fas fa-plus"></i>
                 </button>
             </div>
         </div>
@@ -90,15 +95,18 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group col-md-2 d-flex justify-content-center align-items-end">
-                <button type="button" class="btn btn-light btn-sm mb-1" id="addGenre">Add Genre</button>
+            <div class="form-group col-md-2 d-flex justify-content-around align-items-end">
+                <button type="button" class="btn btn-myDanger btn-sm px-3 mb-1" id="eraseGenre"><i
+                        class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-success btn-sm px-3 mb-1" id="addGenre"><i
+                        class="fas fa-plus"></i></button>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3">
                 <button id="added" type="button" class="btn btn-warning" th:if="${book.book.title!=null}"
                         th:text="${book.book.title} + ' added'"></button>
-                <button id="error" type="button" class="btn btn-danger" th:errors="${book}"></button>
+                <button id="error" type="button" class="btn btn-myDanger" th:errors="${book}"></button>
             </div>
             <div class="col-md-3"></div>
             <div id="types" class="form-row col-md-4 w-100 pr-0 mr-1">

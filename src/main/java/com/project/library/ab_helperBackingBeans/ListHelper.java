@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface ListHelper {
     default List<String> list(String folder, String name) {
@@ -13,7 +14,7 @@ public interface ListHelper {
         Path folderName = Paths.get(folder, name);
 
         try {
-            list = Files.readAllLines(path.resolve(folderName));
+            list = Files.readAllLines(path.resolve(folderName)).stream().sorted().collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }

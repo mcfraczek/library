@@ -38,15 +38,6 @@ public class BorrowingBookController {
         return "borrowingBookForm";
     }
 
-    @RequestMapping("/borrowingBookDetailsDeleteUser")
-    public String borrowingBookDetailsDeleteUser(
-            @RequestParam("name") String name,
-            @RequestParam("surname") String surname,
-            @RequestParam("userId") int userId) {
-        userService.deleteUser(userId);
-        return "borrowingBookForm";
-    }
-
     @RequestMapping("/borrowingBookDetails")
     public String borrowingBookDetails(HttpSession session, Model model, @RequestParam("userId") int userId) {
         /*Biorę id urzytkownika, biorę książkim które wyporzyczył i zapisuję id so sesji na przyszłość*/
@@ -54,7 +45,6 @@ public class BorrowingBookController {
         Optional<User> user = userService.findById(userId);
         BooksPlusList booksPlusList = new BooksPlusList();
         user.ifPresent(u -> booksPlusList.setBookList(u.getBookList()));
-
         model.addAttribute("books", booksPlusList);
         return "borrowingBookDetails";
     }
@@ -76,7 +66,6 @@ public class BorrowingBookController {
         int userId = (int) session.getAttribute("id");
         Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
-
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         model.addAttribute("bookList", bookList);
         return "borrowingBookDetails";
@@ -106,14 +95,13 @@ public class BorrowingBookController {
                                              @RequestParam("genre") String genre,
                                              @RequestParam("returnedId") int returnedId) {
         int userId = (int) session.getAttribute("id");
+
+        userService.returnBook(returnedId, userId);
         Optional<User> user = userService.findById(userId);
         user.ifPresent(v -> model.addAttribute("books", new BooksPlusList(v.getBookList())));
         List<Book> bookList = bookService.find(title, authorNS, libraryNumber, genre);
         model.addAttribute("bookList", bookList);/*dzięki temu po wyszukiwaniu i oddaniu książki,
         nie traci się danych wyszukiwania*/
-
-        userService.returnBook(returnedId, userId);
-
         return "borrowingBookDetails";
     }
 

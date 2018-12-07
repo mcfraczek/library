@@ -125,4 +125,29 @@ public class UserService {
         }
         return true;
     }
+
+    public boolean userDontHaveBooks(int userId) {
+        Optional<User> optionalUser = userDAO.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user1 = optionalUser.get();
+            if (user1.getBookList().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Transactional
+    public void forceDeleteUser(int userId) {
+        Optional<User> optionalUser = userDAO.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user1 = optionalUser.get();
+            List<Book> bookList = user1.getBookList();
+            for (Book book : bookList) {
+                book.setDate(null);
+                book.setUser(null);
+            }
+            userDAO.delete(user1);
+        }
+    }
 }
