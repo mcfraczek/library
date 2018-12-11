@@ -100,6 +100,11 @@ public class UserService {
         Optional<User> userOptional = userDAO.findById(userId);
         if (userOptional.isPresent()) {
             User user1 = userOptional.get();
+            if (user1.getUserDetails().getAddress().getUserList().size() < 2) {
+                Address address = user1.getUserDetails().getAddress();
+                user1.getUserDetails().setAddress(null);
+                addressDEO.delete(address);
+            }
             user1.setBookList(null);
             userDAO.delete(user1);
         }
@@ -142,6 +147,11 @@ public class UserService {
         Optional<User> optionalUser = userDAO.findById(userId);
         if (optionalUser.isPresent()) {
             User user1 = optionalUser.get();
+            if (user1.getUserDetails().getAddress().getUserList().size() < 2) {
+                Address address = user1.getUserDetails().getAddress();
+                user1.getUserDetails().setAddress(null);
+                addressDEO.delete(address);
+            }
             List<Book> bookList = user1.getBookList();
             for (Book book : bookList) {
                 book.setDate(null);

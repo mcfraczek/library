@@ -43,4 +43,13 @@ public class User {
             bookList.add(book);
         }
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", pESEL='" + pESEL + '\'' +
+                '}';
+    }
 }
