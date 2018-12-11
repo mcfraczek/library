@@ -27,4 +27,13 @@ public class UserDetails {
             fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "id=" + id +
+                ", telNumber='" + telNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

@@ -29,4 +29,12 @@ public class Type {
 
         return type != null ? type.equals(type1.type) : type1.type == null;
     }
+
+    @Override
+    public String toString() {
+        return "Type{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
