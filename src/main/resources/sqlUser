@@ -1,2 +1,0 @@
-CREATE USER 'librarist'@'localhost' IDENTIFIED BY 'librarist';
-GRANT ALL PRIVILEGES ON * . * TO 'librarist'@'localhost';
